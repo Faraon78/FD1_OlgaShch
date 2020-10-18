@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area</title>
+    <style>
+        area {
+            outline-color: transparent;
+        }
+        strong{
+            font-size: larger;
+        }
+        
+    </style>
+
+    
+</head>
+<body style="width: 850px; height: 1500px;">
+    <h1>Teг &lt;AREA&gt;</h1>
+    <p>Тег <strong>&lt;area&gt;</strong> (от англ. area - область) определяет активные области изображения, которые являются ссылками.</p>
+
+    <p>Рисунок с привязанными к нему активными областями называется в совокупности картой-изображением. 
+        Такая карта по внешнему виду ничем не отличается от обычного изображения, но при этом оно может 
+        быть разбито на невидимые зоны разной формы, где каждая из областей служит ссылкой. 
+        Элемент <strong>&lt;area&gt;</strong> задаёт форму области, её размеры, устанавливает адрес документа, на который следует сделать ссылку. 
+        <strong>&lt;area&gt;</strong> всегда располагается в контейнере <strong>&lt;map&gt;</strong>, который связывает координаты областей с изображением.</p>
+    <p>Изображение ниже является картой. Если щелкнуть мышью по названию языка программирования, то откроется окно с описанием данного языка в Википедии:</p>   
+    <img src="start.jpg" usemap="#language" alt="Языки программирования" width="500px">
+    <map name="language">
+        <area shape="circle" coords="98,79,40" alt="Язык C" href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B8_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)" target="_blank">
+        <area shape="circle" coords="175,57,40" alt="Язык C++" href="https://ru.wikipedia.org/wiki/C%2B%2B" target="_blank">
+        <area shape="circle" coords="115,172,40" alt="Язык JavaScript" href="https://ru.wikipedia.org/wiki/JavaScript" target="_blank">
+        <area shape="circle" coords="174,113,40" alt="Язык С#" href="https://ru.wikipedia.org/wiki/C_Sharp" target="_blank">
+        <area shape="circle" coords="250,100,40" alt="Язык Java" href="https://ru.wikipedia.org/wiki/Java" target="_blank">
+        <area shape="circle" coords="256,153,40" alt="Язык Python" href="https://ru.wikipedia.org/wiki/Python" target="_blank">
+        <area shape="circle" coords="195,207,40" alt="Язык Php" href="https://ru.wikipedia.org/wiki/PHP" target="_blank">
+    </map>
+    <p>Внутри тега <strong>&lt;map&gt;</strong> создаются теги <strong>&lt;area&gt;</strong>, каждый из которых задает интерактивную область, являющуюся ссылкой.</p>
+    <p>В данном файле к тегам <strong>&lt;area&gt;</strong> были использованы следующие атрибуты:<br>
+    <ul>
+        <li>Атрибут <strong>Shape</strong> указывает форму выделяемой области и может принимать значения:
+        <ul>
+            <li>default - вся область</li>
+            <li>rect - прямоугольник (задаются координаты X1, Y1, X2, Y2)</li>
+            <li>circle - круг (задаются координаты центра X, Y и радиус круга)</li>
+            <li>poly - многоугольная область (задаются координаты всех вершин x1,y1,x2,y2,...,xn,yn)</li>
+        </ul>
+        </li>
+        <li>Атрибут <strong>Coords</strong> задает координаты необходимой области</li>
+        <li>Атрибут <strong>Href</strong> определяет гиперссылку на указанной области</li>
+        <li>Атрибут <strong>Target</strong> указывает в каком окне браузера ссылку</li>
+        <li>Атрибут <strong>alt</strong> определяет альтернативный текст ссылки</li>
+    </ul>
+        Внутри тега <strong>&lt;Img&gt;</strong> был задан атрибут <strong>usemap=&quot;#language&quot;</strong> для связи изображения с тегом <strong>&lt;map&gt;</strong><br>
+        Форма активных областей - круг.</p>
+    <p>Определенные проблемы вызвало определение координат <strong>X</strong> и <strong>Y</strong> для задания атрибута <strong>coords</strong>.
+    Для решения этой проблемы в HTML код был вставлен код JavaScript (скопирован из Интернета), отображающий на экране координаты курсора.<br>
+    После определения всех координат внутри рисунка JavaScript был закомментирован, но не удален из программы.  
+    </p>
+    <p>Также изначально при выделении области на картинке был виден круг (сама активная область), чтобы ее скрыть
+        в стилях использовано свойство <strong>outline-color: transparent</strong>.
+    </p>
+
+    <!--<div class="hover">
+	<p id="coords2">Координаты курсора:</p>
+</div>
+<span id="xy"></span>
+<script type="text/javascript">
+    function init() {
+        if (document.layers) document.captureEvents(Event.MOUSEMOVE);
+        document.onmousemove = mousemove;
+    }
+    function mousemove(event) {
+        var mouse_x = mouse_y = 0;
+        if (document.attachEvent != null) {
+            mouse_x = window.event.clientX;
+            mouse_y = window.event.clientY;
+        } else if (!document.attachEvent && document.addEventListener) {
+            mouse_x = event.clientX;
+            mouse_y = event.clientY;
+        }
+        status = "x = " + mouse_x + ", y = " + mouse_y;
+        document.getElementById('xy').innerHTML = "x = " + mouse_x + ", y = " + mouse_y;
+    }
+    init()
+    </script>-->
+</body>
+</html>
