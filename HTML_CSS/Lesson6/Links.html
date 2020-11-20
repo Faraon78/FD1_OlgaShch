@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+    <style>
+        a{
+            color: green
+            
+        }
+        .first a:not(:last-of-type){
+            display: inline-block;
+            background-image: url(BGImage.png);
+            background-position: right;
+            background-repeat: no-repeat;
+            height: 20px;
+            padding: 15px ;
+        }
+        /* все ссылки обернуты в тег <а>, боковые разделители выполнены как фоновое изображение*/
+        .second td:not(:last-of-type){
+            width: 125px;
+            height: 50px;
+            border-right: 7px solid red;
+            text-align: center;
+        }
+        /*В данном случае ссылки вставлены в таблицу, боковые разделители - это рамка таблицы. Такой вариант легче всего выравнивать */
+        
+        .third ul{
+            padding: 0px;
+            margin: 0px;
+            list-style-type: none;
+        }
+        .third li{
+            display: inline-block;
+            padding: 15px ;
+            margin: 0px;
+            vertical-align: middle ;
+            text-align: center ;
+        }
+        
+        .third li:not(:last-of-type)::after{
+            content: url(BGImage.png)
+        }
+        /* В данном варианте ссылки - это список с тегами <li>, однако у меня не получилось их выровнять по высоте, хотя и стоит 
+        стилевое свойство inline-block, а также vertical-align: middle и text-align: center*/
+
+        .fourth ul{
+            padding: 0px;
+            margin: 0px;
+            list-style-type: none;
+        }
+        .fourth li{
+            display: inline-block;
+            margin: 0px;
+            vertical-align: middle ;
+            text-align: center ;
+            background-image: url(BGImage.png);
+            background-position: right;
+            background-repeat: no-repeat;
+            height: 20px;
+            padding: 15px ;
+        }    
+        .fourth li:last-child{
+            background-image:none;
+        }
+        /* Данный способ является сочетанием первого и третьего: ссылки оформлены в список, а разделитель задан как фоновое изображение.
+        Из всех способов наиболее удобными считаю четвертый и второй*/
+    </style>
+</head>
+<body>
+    <div class="first"><a href="https://www.tut.by/">  Первая ссылка  </a>
+    <a href="https://www.tut.by/">  Вторая ссылка  </a>
+    <a href="https://www.tut.by/">  Третья ссылка  </a>
+    <a href="https://www.tut.by/">  Четвертая ссылка  </a>
+    <a href="https://www.tut.by/">  Пятая ссылка  </a></div>
+
+    <div>
+    <table class="second">
+        <tr>
+            <td><a href="https://www.tut.by/">  Первая ссылка  </a></td>
+            <td><a href="https://www.tut.by/">  Вторая ссылка  </a></td>
+            <td><a href="https://www.tut.by/">  Третья ссылка  </a></td>
+            <td><a href="https://www.tut.by/">  Четвертая ссылка  </a></td>
+            <td><a href="https://www.tut.by/">  Пятая ссылка  </a></td>
+        </tr>
+    </table>
+    </div>
+    <div class="third">
+        <ul>
+            <li><a href="https://www.tut.by/">  Первая ссылка </a> </li>
+            <li><a href="https://www.tut.by/">  Вторая ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Третья ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Четвертая ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Пятая ссылка  </a></li>
+        </ul>
+    </div>
+    <div class="fourth">
+        <ul>
+            <li><a href="https://www.tut.by/">  Первая ссылка </a> </li>
+            <li><a href="https://www.tut.by/">  Вторая ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Третья ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Четвертая ссылка  </a></li>
+            <li><a href="https://www.tut.by/">  Пятая ссылка  </a></li>
+        </ul>
+    </div>
+</body>
+</html>
