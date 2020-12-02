@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketa</title>
+</head>
+<body>
+    <script>
+        var famName=prompt('Введите Фамилию:');
+        var name=prompt('Введите Имя:');
+        var secName=prompt('Введите Отчество:');
+        var strAge=prompt('Введите Ваш возраст:');
+        var age=parseInt(strAge);
+        var day= (age*365);
+        var gender =confirm('Ваш пол мужской? Если нет, нажмите /"Отмена/"');
+        console.log('Ваше ФИО: '+ famName +' '+ name +' '+ secName 
+         + 'ваш возраст в годах: ' + age
+         + 'ваш возраст в днях:' + day
+         + 'через 5 лет вам будет: ' + (age+5));
+    </script>
+</body>
+</html>
