@@ -8,16 +8,41 @@
 <body>
     <script>
         var famName=prompt('Введите Фамилию:');
-        var name=prompt('Введите Имя:');
+        while (!famName){
+            famName=prompt('Введите Фамилию (ответ обязательно должен содержать буквы и (или) знаки)')
+        };
+        var sName=prompt('Введите Имя:');
+        while (!sName){
+            sName=prompt('Введите Имя (ответ обязательно должен содержать буквы и (или) знаки)')
+        };
         var secName=prompt('Введите Отчество:');
         var strAge=prompt('Введите Ваш возраст:');
         var age=parseInt(strAge);
+        while (isNaN(age)){
+            strAge=prompt('Введите Ваш возраст цифрами:');
+            age=parseInt(strAge)
+        };
         var day= (age*365);
         var gender =confirm('Ваш пол мужской? Если нет, нажмите /"Отмена/"');
-        console.log('Ваше ФИО: '+ famName +' '+ name +' '+ secName 
-         + 'ваш возраст в годах: ' + age
-         + 'ваш возраст в днях:' + day
-         + 'через 5 лет вам будет: ' + (age+5));
+        var gp; var pensAge;
+        if (gender){ 
+            gp="Мужской";
+            pensAge=62}
+        else{
+                gp="Женский";
+                pensAge=57};
+        var pens;
+        if (age>=pensAge)
+        pens="Да";
+            else
+            pens="Нет";    
+
+        alert('Ваше ФИО: '+ famName +' '+ sName +' '+ secName +'\n' 
+         + 'ваш возраст в годах: ' + age+ '\n'
+         + 'ваш возраст в днях: ' + day+'\n' 
+         + 'через 5 лет вам будет: ' + (age+5) + ' лет'+'\n'
+         + 'ваш пол '+ gp+' '+'\n'
+         + 'вы на пенсии: '+pens);
     </script>
 </body>
 </html>
