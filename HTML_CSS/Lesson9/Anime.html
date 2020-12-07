@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    <style>
+        @keyframes MyAnimation {
+            from { background: url('sprite.png') -15px -30px; }
+            to { background: url('sprite.png') -720px -30px; }
+            }
+        body{
+            padding: 30px;            
+        }
+        .content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .anim {
+        width: 95px;
+        height: 135px;
+        animation: MyAnimation 1s steps(7) infinite;
+        }
+        .one{
+            
+            background-image: url('table.png');
+            height: 200px; 
+            width: 500px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            text-align: center;
+            font-size: 90px;
+            padding-top: 30px;
+            letter-spacing:9px;
+            color: transparent;
+            transition-duration: 3s;
+        }
+        img{
+            width: 400px;
+        }
+        .two{
+            transition-duration: 2s; 
+        }
+        .content:hover .one{
+            color: black;
+        }
+        .content:hover .two{
+            transform: skew(40deg,-15deg);
+        }    
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="anim"></div>
+        <div class="one">Жуть</div>
+        <div class="two"><img src='16.jpg'> </div>
+    </div>
+</body>
+</html>
