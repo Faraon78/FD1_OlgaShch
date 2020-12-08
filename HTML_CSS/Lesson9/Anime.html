@@ -9,6 +9,18 @@
             from { background: url('sprite.png') -15px -30px; }
             to { background: url('sprite.png') -720px -30px; }
             }
+        @keyframes MyAnimation1 {
+            from { color: transparent; font-size: 70px;}
+            50% { color:red; font-size: 100px; font-weight: bold;}
+            to { color: transparent; font-size: 70px;}
+            }
+        @keyframes MyAnimation2 {
+            from { transform: skew(0deg,0deg);}
+            25% { transform: skew(40deg,-15deg);}
+            50% { transform: skew(0deg,0deg);}
+            75% {transform: skew(-40deg,15deg);}
+            to { transform: skew(0deg,0deg);}
+            }
         body{
             padding: 30px;            
         }
@@ -30,23 +42,23 @@
             background-size: contain;
             background-repeat: no-repeat;
             text-align: center;
-            font-size: 90px;
+            font-size: 70px;
             padding-top: 30px;
             letter-spacing:9px;
             color: transparent;
-            transition-duration: 3s;
+            
         }
         img{
             width: 400px;
         }
         .two{
-            transition-duration: 2s; 
+            transition-duration: 3s; 
         }
         .content:hover .one{
-            color: black;
+            animation: MyAnimation1 3s infinite;
         }
         .content:hover .two{
-            transform: skew(40deg,-15deg);
+            animation: MyAnimation2 5s infinite;
         }    
     </style>
 </head>
