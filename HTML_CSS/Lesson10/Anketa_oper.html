@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketa_oper</title>
+</head>
+<body>
+    <script>
+        var famName=prompt('Введите Фамилию:');
+        var sName=prompt('Введите Имя:');
+        var secName=prompt('Введите Отчество:');
+        var strAge=prompt('Введите Ваш возраст:');
+        var age=parseInt(strAge);
+        var day= (age*365);
+        var gender =confirm('Ваш пол мужской? Если нет, нажмите /"Отмена/"');
+        var gp=(gender? 'мужской': 'женский');
+        var pensAge=(gender? '62': '57');
+        var pens=(age>=pensAge? 'да': 'нет');
+         
+
+        alert('Ваше ФИО: '+ famName +' '+ sName +' '+ secName +'\n' 
+         + 'ваш возраст в годах: ' + age+ '\n'
+         + 'ваш возраст в днях: ' + day+'\n' 
+         + 'через 5 лет вам будет: ' + (age+5) + ' лет'+'\n'
+         + 'ваш пол '+ gp+' '+'\n'
+         + 'вы на пенсии: '+pens);
+    </script>
+</body>
+</html>
