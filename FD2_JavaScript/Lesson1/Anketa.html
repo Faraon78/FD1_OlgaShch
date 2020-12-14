@@ -16,6 +16,9 @@
             sName=prompt('Введите Имя (ответ обязательно должен содержать буквы и (или) знаки)')
         };
         var secName=prompt('Введите Отчество:');
+        while (!secName){
+            secName=prompt('Введите Отчество (ответ обязательно должен содержать буквы и (или) знаки)')
+        };
         var strAge=prompt('Введите Ваш возраст:');
         var age=parseInt(strAge);
         while (isNaN(age)){
