@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowels</title>
+</head>
+<body>
+    <script>    
+    function vow(a){
+        a=a.toLowerCase();
+        var v={'а':true,'е':true,'ё':true,'и':true,'о':true,'у':true,'ы':true,'э':true,'ю':true,'я':true};
+        var count=0;
+        for (var i=0;
+             i<a.length; 
+             i++ ){
+        var b=a[i];
+        if (b in v)
+            count++ ;   
+        };
+        return count;
+    };
+    var a=prompt('Введите фразу или слово русскими буквами');
+    alert('Cчитаем гласные в строке ' +'\"'+ a + '\"'+ " = " + vow(a));
+    </script>
+</body>
+</html>
