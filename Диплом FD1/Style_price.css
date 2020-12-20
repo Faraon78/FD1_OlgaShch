@@ -1,0 +1,83 @@
+/*В данном файле описаны стили для страницы Price*/
+.MenuPage{    
+    margin-bottom: 20px;
+}
+.citate{
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+    letter-spacing: 0.15em;
+    font-style: italic;
+    
+}
+.citate div:first-child{
+    flex-basis: 500px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    
+}
+.citate div:last-child{
+    margin-left: 50px;
+    margin-right: 50px;
+    flex-grow: 8;
+    flex-shrink: 1;
+    padding-top: 15px;
+}
+.citate img{
+    width: 500px;
+}
+.text{
+    text-align: center;
+    color: #2f8586;
+    font-weight: bolder;
+    padding-top: 20px;
+    font-size: 1.5em;
+}
+div.price>div{
+    padding-top: 30px;
+}
+div.bgp{
+    height: 950px;
+}
+.text span{
+    color: #a0cc4e;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+@media screen and (max-width: 1250px){
+    .citate{
+        font-size: 1em;
+    }
+    .text{
+        font-size: 1.2em;
+    }
+    .citate img{
+        width: 400px;
+    }
+    .citate div:last-child{
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-top: 5px;
+    }
+}
+@media screen and (max-width: 800px){
+    .citate{
+        display: block;   
+        font-weight: normal;   
+        padding-left: 5px;  
+    }
+    .citate div:first-child{
+        float: left;
+        padding-right: 5px;
+    }
+    .citate img{
+        width: 250px;
+    }
+    div.bgp{
+        height: 2100px;
+    }
+    .text{
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,90 @@
+/*В данном файле описаны стили для страницы About*/
+.MenuPage{    
+    margin-bottom: 100px;
+}
+.article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 1250px;
+    justify-content: center;
+    flex-grow: 0;
+    margin-bottom: 30px;
+}
+.desc, .image {
+    flex-basis: 600px;
+    padding: 20px;
+    flex-grow: 0;
+    height: 350px;
+    
+}
+.row:nth-child(odd) .desc, .row:nth-child(even) .image{
+    order:1 ;
+}
+.row:nth-child(even) .desc, .row:nth-child(odd) .image{
+    order:2 ;
+}
+.desc img{
+    float: left;
+    
+}
+.desc p{
+    font-size: 1em;
+}
+.desc p, .desc h2{
+    margin-left: 160px;
+}
+.image img{
+    width: 600px;
+    overflow: hidden;
+    
+}
+.row:nth-child(5){
+    height: 600px;
+}
+@media screen and (max-width: 1250px){
+    .image img{
+        width: 450px;
+    }
+}
+@media screen and (max-width: 800px){
+    .row{
+        flex-direction: column;
+    }
+    div.desc{
+        flex-basis: 200px;
+        flex-grow: 2;
+        flex-shrink: 1;
+        width: 95%;
+    }
+    div.image{
+        flex-basis: 350px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 90%;
+    }
+    .row:nth-child(even) .desc {
+        order:1 ;
+    }
+    .row:nth-child(odd) .image{
+        order: 2;
+    }
+}
+@media screen and (max-width: 450px){
+    .image img{
+        width: 100%;
+    }
+    .desc{
+        height: 410;
+        padding: 3px;
+    }
+    .image{
+        height: 260px;
+        padding: 3px;
+    }
+}

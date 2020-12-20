@@ -1,0 +1,556 @@
+/*В данном файле описаны стили для страницы Home и блоков, повторяющихся на всех страницах*/
+*{
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    font-size: 100%;
+}
+Header{
+    background-color: #1a3233;
+    opacity: 90%;
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.adress{
+    margin-left: 40px;
+    padding-top: 8px;
+    flex-basis: 400px;
+    flex-grow: 3;
+    order: 1;
+    display: flex;
+    
+}
+Header img{
+    height: 1.2em;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+.tel{
+    margin-right: 40px;
+    padding-top: 8px;
+    flex-basis: 200px;
+    order: 3;
+    
+}
+.post{
+    margin-right: 40px;
+    padding-top: 8px;
+    flex-basis: 200px;
+    order: 2;
+    
+}
+.MenuMain{
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.logo{
+    flex-basis: 15%;
+    text-align: center;
+    vertical-align: middle;
+}    
+.plan{
+    flex-basis: 15%;
+    text-align: center;
+    order: 3;
+}
+.plan div, .plan a:visited{
+    width: 180px;
+    height: 35px;
+    display: inline-block;
+    background-color: #53c0c2;
+    color: white;
+    vertical-align: middle;
+    font-weight: bold;
+    padding-top: 10px;
+    border: 2px solid #41b1b3;
+    border-radius: 3px;
+    box-shadow: 0 0 10px#3ca8aa inset
+}
+a:link{
+    text-decoration: none;
+}
+.menu1{
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: large;
+    
+}
+.menu1 li{
+    display: inline-block;
+    width: 130px;
+    text-align: center;
+    margin: 0;
+}
+.menu1 a, .menu1 a:visited{
+    
+    color: black;
+}
+.menu1 a:hover, .menu1 a:visited:hover{
+    color: #a0cc4e;
+}
+.MenuPage{    
+    height: 150px;
+    background-image: url(Images/breadckrumbs-bg.jpg);
+    background-position-y: -110px;
+    opacity: 0.8;
+    
+}
+.MenuPage>div{
+    background-color: rgb(160, 204, 78, 0.7);
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.MenuPage>div>div{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+}    
+.MenuPage  span{
+    font-size: 1.5em;
+}
+.MenuPage a:visited{
+    color: white;
+}
+.foto{
+    background-image: url(Images/slide-2.jpg);
+    background-size: cover;
+    height: 850px;
+    background-repeat: no-repeat;
+    background-position-y: -100px;
+}    
+.foto p:first-child{
+    font-family: 'Raleway', sans-serif;
+    font-size: 9em;
+    letter-spacing: 20px;
+    text-align: center;
+    opacity:100%;
+    color: #c0ec6f;
+    vertical-align: middle;
+    padding-top: 2em;
+    transition-property: text-align;
+    transition: 1s;
+}
+
+.foto p:last-child{
+    font-family: 'Raleway', sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    color: #53c0c2;
+}
+.foto2{
+    background-image: url(Images/wom1.jpeg);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position-y: 170px;
+    background-position-x: 40px;
+    height: 950px;
+}
+.center{            
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.center div{
+    display: inline-block;
+    flex-basis: 500px;
+    height: 250px;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    margin-top: -30px;
+    vertical-align: middle;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+}
+.c1, .c1>div{
+    background-color: #deb316;
+}
+.c2, .c2>div{
+    background-color: #a0cc4e;
+}
+.c3, .c3>div {
+    background-color: #53c0c2;
+}
+
+.center>div>div{
+    width: 80px;
+    height: 80px;
+    z-index: 2;
+    border-style: solid 2px;
+    border-radius: 45%;
+    margin-top: -40px;
+}
+.center a:visited{
+    color: white;
+}
+@keyframes MyAnimation1 {
+    from { opacity: 1; width: 80px; height: 80px;}
+    90% { opacity: 0.3; width: 100px; height: 100px; margin-top: -60px;}
+    to { opacity: 1; width: 80px; height: 80px; margin-top: -40px;}
+}
+.center>div>div {
+    animation: MyAnimation1 2s infinite;
+}
+.info {
+    color: black;
+    width: 500px;
+    float: right;
+    margin-right: 200px;
+    text-align: justify;
+    padding-top: 100px;
+}
+.info>img{
+    width: 50%;
+}
+li{
+    color: rgb(61, 58, 58);
+    padding-top: 1em;
+}
+li span{
+    font-weight: bold;
+    font-size: larger;
+}
+.mob{
+    display: none;
+}
+.bg{
+    background-color: #f2f2f2;
+    height: 850px;
+}
+.price{
+    display: flex;
+    justify-content: center;
+    
+}
+.price>div{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 100px;
+    
+}
+.up{
+    width: 350px;
+    height: 100px;
+    background-color: white;
+    font-size: 2.5em;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 40px;
+}
+.down{
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    margin-top: 2px;
+    text-align: center;
+    position: relative;
+}
+.down p{
+    font-size: 1.2em;
+}
+.price1 h1{
+    color: #deb316;
+}
+.price2 h1{
+    color: #a0cc4e;
+}
+.price3 h1{
+    color: #53c0c2;
+}
+.button{
+    height: 50px;
+    width: 200px;
+    font-size: 1.5em;
+    position: absolute; 
+    bottom: 25px;
+    left: 75px;
+    padding-top: 10px;
+    border-radius: 3px;
+    
+}
+.price1 .button{
+    background-color: #deb316;
+    color: white;
+}
+.price2 .button{
+    background-color: #a0cc4e;
+    color: white;
+}
+.price3 .button{
+    background-color:  #53c0c2;
+    color: white;
+}
+.price1:hover .up, .price1:hover .down, .price1:hover h1{
+    background-color: #deb316;
+    color: white;
+}
+.price1:hover div.button{
+    background-color:white;
+    color: #deb316;
+}
+.price2:hover .up, .price2:hover .down, .price2:hover h1{
+    background-color: #a0cc4e;
+    color: white;
+}
+.price2:hover div.button{
+    background-color:white;
+    color: #a0cc4e;
+}
+.price3:hover .up, .price3:hover .down, .price3:hover h1{
+    background-color: #53c0c2;
+    color: white;
+}
+.price3:hover div.button{
+    background-color:white;
+    color:  #53c0c2;
+}
+.price1 a:visited, .price2 a:visited, .price3 a:visited{
+    color: white;
+}
+.price1:hover a:visited{
+    color: #deb316;
+}
+.price2:hover a:visited{
+    color: #a0cc4e;
+}
+.price3:hover a:visited{
+    color:#53c0c2;
+}
+footer{
+    background-color: #1a3233;
+    opacity: 90%;
+    height: 80px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5em;
+    
+}
+footer .tel img{
+    height: 2em;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+footer .tel{
+    flex-basis: auto;
+}
+.author{
+    font-size: 0.8em;
+}
+@media screen and (max-width: 1250px){
+    .plan{
+        display: none;
+        
+    }
+    .MenuMain{
+        flex-direction: column;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        min-height: 130px;
+    }
+    .logo{
+        display: inline-block;
+        align-items: center;
+    }
+    .logo img{
+        width: 200px;
+        
+    }  
+    .MenuPage{    
+        height: 100px;
+        background-position-y: -110px;
+    }
+    .MenuPage>div{
+        height: 100px;
+    }
+    .MenuPage  span{
+        font-size: 1em;
+    }
+    .foto{
+        background-size: cover;
+        height: 700px;
+        background-position: 50%;
+       
+    }    
+    .foto p:first-child{
+        font-size: 5em;
+        letter-spacing: 12px;
+    }
+    .foto2{        
+        background-size: 37%;
+        background-position-y: bottom;
+        background-position-x: 40px;
+        height: 1100px;
+    }
+    .center{            
+        flex-direction: column;
+        margin-left: 0px;
+        margin-right: 0px; 
+        height: 390px;       
+    }
+    .center>div{
+        margin: 0;
+        padding-bottom: 50px;
+        flex-basis: 130px;
+    }
+    .center>div>div{
+        width: 80px;
+        height: 80px;
+        margin-top: -40px;
+    }
+    
+    .info {
+        width: 450px;
+        margin-right: 50px;
+        padding-top: 150px;
+    }
+    .bg{
+        height: 700px;
+    }
+    .price>div{
+        padding-top: 30px;
+    }
+    .up{
+        width: 250px;
+        height: 100px;
+        
+        font-size: 2em;
+        font-weight: 500;
+        
+        padding-top: 40px;
+    }
+    .down{
+        width: 250px;
+        height: 500px;        
+        margin-top: 2px;
+      
+    }
+    .down p{
+        font-size: 1.2em;
+    }
+    .button{
+        height: 40px;
+        width: 180px;
+        font-size: 1.2em;
+        left: 35px;        
+    }
+    #log{
+        width: 130px;
+    }
+    footer .tel img{
+        height: 1.5em;
+    }
+}
+@media screen and (max-width: 800px){
+    Header{
+        display: none;
+    }
+    .menu1{
+        font-size: normal;
+        
+    }
+    .logo{
+        flex-basis: 10%;
+    }
+    .menu1 li{
+        display: inline-block;
+        width: 90px;
+    }
+    .foto{
+        height: 500px;
+        background-position: 50%;       
+    }    
+    .foto p:first-child{
+        font-size: 4em;
+        letter-spacing: normal;
+    }
+    .foto p:last-child{
+        font-size: 1.5em;
+    }
+    .foto2{        
+        background-image: none;
+        height: auto;
+    }
+    .info {
+        width: auto;
+        float: none;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: justify;
+        padding-top: 150px;   
+        height: auto;     
+    }
+    .info img{
+        width: 150px;
+        padding-top: 5px;
+    }
+    .mob{
+        display: block;
+        height: 500px;        
+    }    
+    .mob img{
+        height: 100%;
+    }
+    .bg{
+        height:1810px;
+    }
+    .price{
+        flex-direction: column;        
+    }
+    .up{
+        width: auto;
+        height: 50px;        
+        font-size: 2em;
+        font-weight: 500;        
+        padding-top: 15px;
+    }
+    .down{
+        width: auto;
+        margin-top: 2px;
+        align-items: center;  
+    }
+    .button{
+        width: 100%;
+        left: 0;
+        margin-bottom: 0;
+    }
+    .author{
+        display:none ;
+    }
+    #log{
+        width: 80px;
+    }
+    footer{
+        height: 40px;
+        vertical-align: middle;
+    }
+    footer .tel img{
+        height: 1em;
+    }
+    footer .tel{
+        font-size: 0.7em;
+        padding-top: 0px;
+    }
+}
+@media screen and (max-width: 400px){
+    .foto p:first-child{
+        font-size: 2em;
+    }
+}
