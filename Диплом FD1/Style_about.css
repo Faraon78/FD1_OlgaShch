@@ -52,7 +52,7 @@
         width: 450px;
     }
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 900px){
     .row{
         flex-direction: column;
     }
@@ -60,13 +60,15 @@
         flex-basis: 200px;
         flex-grow: 2;
         flex-shrink: 1;
-        width: 95%;
+        width: 450px;
+        padding: 3px;
     }
     div.image{
         flex-basis: 350px;
         flex-grow: 1;
         flex-shrink: 1;
-        width: 90%;
+        width: 100%;
+        padding: 3px;
     }
     .row:nth-child(even) .desc {
         order:1 ;

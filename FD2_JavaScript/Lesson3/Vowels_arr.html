@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowels_arr</title>
+</head>
+<body>
+    <script>    
+    function vow1(a){
+        var b=a.toLowerCase().split("");
+        var w={'а':true,'е':true,'ё':true,'и':true,'о':true,'у':true,'ы':true,'э':true,'ю':true,'я':true};
+        var count=0;
+        b.forEach(function (b){
+        if (b in w)
+        count++ ; 
+        }               
+        );
+        return(count);
+    };
+
+    function vow2(a){
+        var b2=a.toLowerCase().split("");
+        var w2={'а':true,'е':true,'ё':true,'и':true,'о':true,'у':true,'ы':true,'э':true,'ю':true,'я':true};
+        var c=b2.filter(function (b2){
+        if (b2 in w2)
+        return true}               
+        );   
+        return(c.length);
+    };
+
+    function vow3(a){
+        var b3=a.toLowerCase().split("");
+        var w3={'а':true,'е':true,'ё':true,'и':true,'о':true,'у':true,'ы':true,'э':true,'ю':true,'я':true};        
+        var e=b3.reduce(function (sum, b3){
+        if (b3 in w3)
+        sum++; 
+        return sum
+        ;}, 0               
+        );   
+        return(e)
+    };
+
+    var a=prompt('Введите фразу или слово русскими буквами');
+    alert('Cчитаем гласные в строке ' +'\"'+ a + '\"'+ ' методом forEach ' + " = " + vow1(a) +'\n'
+        + 'Cчитаем гласные в строке ' +'\"'+ a + '\"'+ ' методом filter ' + " = " + vow2(a) +'\n'
+        + 'Cчитаем гласные в строке ' +'\"'+ a + '\"'+ ' методом reduce ' + " = " + vow3(a));
+    </script>
+</body>
+</html>
