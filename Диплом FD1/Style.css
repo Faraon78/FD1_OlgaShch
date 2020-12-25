@@ -418,7 +418,7 @@ footer .tel{
     
     .info {
         width: 450px;
-        margin-right: 50px;
+        margin-right: 40px;
         padding-top: 150px;
     }
     .bg{
@@ -458,7 +458,7 @@ footer .tel{
         height: 1.5em;
     }
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 850px){
     Header{
         display: none;
     }

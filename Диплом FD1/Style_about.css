@@ -55,20 +55,21 @@
 @media screen and (max-width: 900px){
     .row{
         flex-direction: column;
+        justify-content: center;
     }
     div.desc{
         flex-basis: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
         flex-shrink: 1;
         width: 450px;
-        padding: 3px;
+        padding: 0px;
     }
     div.image{
         flex-basis: 350px;
         flex-grow: 1;
         flex-shrink: 1;
         width: 100%;
-        padding: 3px;
+        padding: 0px;
     }
     .row:nth-child(even) .desc {
         order:1 ;
@@ -76,17 +77,22 @@
     .row:nth-child(odd) .image{
         order: 2;
     }
+    #chair{
+        height: 400px;
+    }
+    
 }
 @media screen and (max-width: 450px){
     .image img{
         width: 100%;
     }
     .desc{
-        height: 410;
+        height: 250px;
         padding: 3px;
     }
     .image{
         height: 260px;
         padding: 3px;
     }
+    
 }
