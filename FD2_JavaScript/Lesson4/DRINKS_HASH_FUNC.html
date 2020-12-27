@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks_func</title>
+</head>
+<body>    
+    
+<script>
+    "use strict";
+function HashStorageFunc(){
+    this.storage={}
+    this.addValue=function(key, value){
+        this.storage[key]=value;
+    };
+    this.getValue=function(key){
+        return this.storage[key]
+    };
+    this.deleteValue=function(key){
+        if (key in this.storage){
+            delete this.storage[key];
+        };
+            return true;
+        return false; 
+    };
+    this.getKeys=function(){
+        return Object.keys(
+            this.storage
+        )
+    };
+}
+var drinkStorage= new HashStorageFunc()
+function addDrink() {
+    var n=prompt("Введите название напитка");
+    var a=confirm("Этот напиток алкогольный?");
+    var r=prompt("Введите рецепт напитка");
+    drinkStorage.addValue(n,{
+        alco:a, rec:r
+    })
+};
+function getDrink(){
+    var n=prompt("Введите название напитка");
+    var i=drinkStorage.getValue(n);
+    if (n in drinkStorage.storage){
+        var ia;
+        if (i.alco) {
+            ia="да"}
+            else {
+            ia="нет"
+        };
+        alert("Напиток: " + n + '\n' +
+        "Алкогольный: " + ia + '\n' +
+        "Рецепт приготовления: " + '\n'
+        + i.rec + "  смешать"
+        )}
+    else {
+        alert("Извините, такого напитка в нашей книге нет")
+    }
+};
+function delDrink(){
+    var n=prompt("Введите название напитка");
+    var del=drinkStorage.deleteValue(n);
+    console.log(del);
+    if (del==true){
+        alert("Напиток "+ n + "  успешно удален")
+    }
+    else {
+        alert("Напиток удалить не получилось")
+    }
+};
+function getAll(){
+    var k=drinkStorage.getKeys()
+    alert ("В нашей книге есть следующие напитки: " + '\n' + k)
+}
+</script>
+<div>
+    <input type='button' value='Введите информацию о напитке' onclick='addDrink()'>
+    <input type='button' value='Получите информацию о напитке' onclick='getDrink()'>
+    <input type='button' value='Удалите информацию о напитке' onclick='delDrink()'>
+    <input type='button' value='Перечень всех напитков' onclick='getAll()'>
+</div>
+    </body>
+</html>
