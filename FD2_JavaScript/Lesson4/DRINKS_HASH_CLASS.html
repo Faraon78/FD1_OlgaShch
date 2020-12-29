@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drinks_func</title>
+    <title>Drinks_class</title>
 </head>
 <body>    
     
 <script>
     "use strict";
-function HashStorageFunc(){
-    this.storage={}
-    this.addValue=function(key, value){
+class HashStorageFunc{
+    constructor(key){
+    this.storage={};
+    }
+    addValue=function(key, value){
         this.storage[key]=value;
     };
-    this.getValue=function(key){
+    getValue=function(key){
         return this.storage[key]
     };
-    this.deleteValue=function(key){
+    deleteValue=function(key){
         if (key in this.storage){
             delete this.storage[key];
             return true;}
         else
             return false; 
     };
-    this.getKeys=function(){
+    getKeys=function(){
         return Object.keys(
             this.storage
         )
     };
+
 }
 var drinkStorage= new HashStorageFunc()
 function addDrink() {
