@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyn_Form</title>
+</head>
+<body>    
+   <form name="f1" action="https://fe.it-academy.by/TestForm.php"></form> 
+   <form name="f2" action="https://fe.it-academy.by/TestForm.php"></form>
+<script>
+    "use strict";
+    var formDef1=
+[
+  {label:'Название сайта:',kind:'longtext',name:'sitename'},
+  {label:'URL сайта:',kind:'longtext',name:'siteurl'},
+  {label:'Посетителей в сутки:',kind:'number',name:'visitors'},
+  {label:'E-mail для связи:',kind:'shorttext',name:'email'},
+  {label:'Рубрика каталога:',kind:'combo',name:'division',
+    variants:[{text:'здоровье',value:1},{text:'домашний уют',value:2},{text:'бытовая техника',value:3}]},
+  {label:'Размещение:',kind:'radio',name:'payment',
+    variants:[{text:'бесплатное',value:1},{text:'платное',value:2},{text:'VIP',value:3}]},
+  {label:'Разрешить отзывы:',kind:'check',name:'votes'},
+  {label:'Описание сайта:',kind:'memo',name:'description'},
+  {label:'Опубликовать:',kind:'submit'},
+];
+
+var formDef2=
+[
+  {label:'Фамилия:',kind:'longtext',name:'lastname'},
+  {label:'Имя:',kind:'longtext',name:'firstname'},
+  {label:'Отчество:',kind:'longtext',name:'secondname'},
+  {label:'Возраст:',kind:'number',name:'age'},
+  {label:'Зарегистрироваться:',kind:'submit'},
+];
+
+function buildForm (fd, fe){
+    
+    fd.forEach(element => {
+        if (element.kind != 'submit'){
+        let l=document.createElement('span');
+        l.innerHTML=element.label;
+        fe.appendChild(l);    
+        }    
+        if(element.kind=='longtext'){
+            let per=document.createElement('input');
+            per.type='text';
+            per.name=element.name;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+        if(element.kind=='number'){
+            let per=document.createElement('input');
+            per.type='number';
+            per.name=element.name;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+        if(element.kind=='shorttext'){
+            let per=document.createElement('input');
+            per.type='e-mail';
+            per.name=element.name;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+        if(element.kind=='combo'){
+            let per=document.createElement('select');
+            per.name=element.name;
+            for (var i=0;
+             i<element.variants.length; 
+             i++ ){
+            let opt=document.createElement('option')
+            opt.value=element.variants[i].value;
+            opt.innerHTML=element.variants[i].text;
+            per.appendChild(opt);
+            }
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+             
+        };
+        if(element.kind=='radio'){
+            for (var i=0;
+                i<element.variants.length; 
+                i++ ){
+                let per=document.createElement('input');
+                per.type='radio';
+                per.name=element.name;
+                per.value=element.variants[i].value;
+                let opt=document.createElement('span')
+                opt.innerHTML=element.variants[i].text;
+                fe.appendChild(per);
+                fe.appendChild(opt);
+            }            
+            let br=document.createElement('br');
+            fe.appendChild(br);             
+        };
+        if(element.kind=='check'){
+            let per=document.createElement('input');
+            per.type='checkbox';
+            per.name=element.name;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+        if(element.kind=='memo'){
+            let per=document.createElement('textarea');
+            per.name=element.name;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+        if(element.kind=='submit'){
+            let per=document.createElement('input');
+            per.type='submit';
+            per.value=element.label;
+            fe.appendChild(per);
+            let br=document.createElement('br');
+            fe.appendChild(br);
+            
+        };
+    });
+};
+
+buildForm(formDef1, document.forms.f1);
+buildForm(formDef2, document.forms.f2);
+</script>
+
+    </body>
+</html>
