@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valid_Form</title>
+    <style>
+        label{
+            display: inline-block;
+            width: 180px;
+        }
+        *{
+            font-size: large;
+        }
+    </style>
+</head>
+<body>    
+    <p>Для внесения вашего сайта в каталог, заполните форму:</p>
+    <form name="f1" action="https://fe.it-academy.by/TestForm.php">
+        <label for="dev">Разработчики:</label><input type="text" name="dev" id="dev"> <br>
+        <label for="site">Название сайта:</label><input type="text" name="site" id="site"><br>
+        <label for="url">Url сайта:</label><input type="url" name="url" id="url"><br>
+        <label for="data">Дата запуска сайта:</label><input type="date" name="date" id="date"><br>
+        <label for="count">Посетителей в сутки:</label><input type="text" name="count" id="count"><br>
+        <label for="mail">E-mail для связи:</label><input type="email" name="mail" id="mail"><br>
+        <label for="catalog">Рубрика каталога:</label><select id="catalog" name="catalog"> 
+            <option value="0"></option>
+            <option value="1">здоровье</option>
+            <option value="2">домашний уют</option>
+            <option value="3">бытовая техника</option>
+        </select>    <br>
+        <label>Размещение:</label>
+            <input type="radio" value="1" name="cost1"><span >бесплатное</span> 
+            <input type="radio" value="2" name="cost2"><span >платное</span> 
+            <input type="radio" value="3" name="cost3"><span id="vip">VIP</span><br>
+        <label for="agr">Разрешить отзывы:</label><input type="checkbox" id="agr" name="agr"><br>
+        <label for="desc">Описание сайта:</label><br>
+        <textarea name="desc" id="desc"> </textarea><br>
+        <input type="submit" value="опубликовать">
+    </form> 
+   
+<script>
+    "use strict";
+    
+    var formDev=document.forms.f1.dev; 
+    formDev.addEventListener('blur',validateFormDev); 
+    var formSite=document.forms.f1.site; 
+    formSite.addEventListener('blur',validateFormSite); 
+    var formUrl=document.forms.f1.url; 
+    formUrl.addEventListener('blur',validateFormUrl); 
+    var formDate=document.forms.f1.date; 
+    formDate.addEventListener('blur',validateFormDate); 
+    var formCount=document.forms.f1.count; 
+    formCount.addEventListener('blur',validateFormCount); 
+    var formMail=document.forms.f1.mail; 
+    formMail.addEventListener('blur',validateFormMail); 
+    var formCatalog=document.forms.f1.catalog; 
+    formCatalog.addEventListener('blur',validateFormCatalog); 
+    var formCost1=document.forms.f1.cost1;
+    formCost1.addEventListener('blur',validateFormCost); 
+    var formCost2=document.forms.f1.cost2; 
+    formCost2.addEventListener('blur',validateFormCost); 
+    var formCost3=document.forms.f1.cost3; 
+    formCost3.addEventListener('blur',validateFormCost); 
+    var formAgr=document.forms.f1.agr; 
+    formAgr.addEventListener('change',validateFormAgr); 
+    var formDesc=document.forms.f1.desc; 
+    formDesc.addEventListener('blur',validateFormDesc); 
+    
+    var d=document.createElement('span');//создаем пустой блок для вывода сообщений
+        dev.after(d); 
+    function validateFormDev(EO) {
+            EO=EO||window.event;
+        var formDev=document.forms.f1.dev;
+        var devValue=formDev.value; 
+        if ( !devValue||devValue.length>70||devValue.length<10 ) {//название должно быть не менее 10 и не более 70 символов
+            d.textContent="Введите корректно Ваше имя и Фамилию"; 
+            d.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            d.textContent="";
+            }
+    }    
+    var s=document.createElement('span');//создаем пустой блок для вывода сообщений
+        site.after(s); 
+    function validateFormSite(EO) {
+        EO=EO||window.event;
+        var formSite=document.forms.f1.site;
+        var siteValue=formSite.value; 
+        if ( !siteValue||siteValue.length>40||siteValue.length<3 ) {//название должно быть не менее 3 и не более 40 символов
+            s.textContent="Введите корректно Название сайта";
+            s.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            s.textContent="";
+            }
+        }    
+    var u=document.createElement('span');//создаем пустой блок для вывода сообщений
+        url.after(u); 
+    function validateFormUrl(EO) {
+        EO=EO||window.event;
+        var formUrl=document.forms.f1.url;
+        var urlValue=formUrl.value; 
+        if ( !urlValue|| urlValue.indexOf("//")==-1 ) {//название должно содержать символы "//"
+            u.textContent="Введите корректно Url сайта";
+            u.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            u.textContent="";
+            }
+        }    
+    var dt=document.createElement('span');//создаем пустой блок для вывода сообщений
+        date.after(dt); 
+    function validateFormDate(EO) {
+        EO=EO||window.event;
+        var formDate=document.forms.f1.date;
+        var dateValue=formDate.value; 
+        if ( !dateValue) {//дата должна быть введена
+            dt.textContent="Введите дату";
+            dt.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            dt.textContent="";
+            }       
+    }    
+    var c=document.createElement('span');//создаем пустой блок для вывода сообщений
+        count.after(c); 
+    function validateFormCount(EO) {
+        EO=EO||window.event;
+        var formCount=document.forms.f1.count;
+        var countValue=parseInt(formCount.value.trim());  //приводим к целому числу       
+        if (isNaN(countValue)) {//должно быть число и должно быть заполнено
+            c.textContent="Введите корректное число";
+            c.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            c.textContent="";
+            }        
+    }    
+    var m=document.createElement('span');//создаем пустой блок для вывода сообщений
+        mail.after(m); 
+    function validateFormMail(EO) {
+        EO=EO||window.event;
+        var formMail=document.forms.f1.mail;
+        var mailValue=formMail.value; 
+        if ( !mailValue|| mailValue.indexOf("@")==-1 ) {//название должно содержать символ "@"
+            m.textContent="Введите корректно E-mail";
+            m.style.color ="red";
+            EO.preventDefault();            
+            }
+        else {
+            m.textContent="";
+            }        
+    }  
+    var ct=document.createElement('span');//создаем пустой блок для вывода сообщений
+        catalog.after(ct); 
+    function validateFormCatalog(EO) {
+        EO=EO||window.event;
+        var formCatalog=document.forms.f1.catalog;
+        var catalogValue=formCatalog.value; 
+        if ( catalogValue=="0") {//значение должно быть выбрано из списка
+            ct.textContent="Выберите значение из списка";
+            ct.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+           ct.textContent="";
+           }
+        }      
+    var cost=document.createElement('span');//создаем пустой блок для вывода сообщений
+        vip.after(cost); 
+    function validateFormCost(EO) {
+        EO=EO||window.event;
+        var formCost1=document.forms.f1.cost1;
+        var cost1Value=formCost1.checked; 
+        var formCost2=document.forms.f1.cost2;
+        var cost2Value=formCost2.checked; 
+        var formCost3=document.forms.f1.cost3;
+        var cost3Value=formCost3.checked; 
+        
+        if ( !cost1Value&&!cost2Value&&!cost3Value) {//значение должно быть выбрано 
+            cost.textContent="Выберите значение";
+            cost.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            cost.textContent=""}
+    }      
+    var ar=document.createElement('span');//создаем пустой блок для вывода сообщений
+        agr.after(ar); 
+    function validateFormAgr(EO) {
+        EO=EO||window.event;
+        var formAgr=document.forms.f1.agr;
+        var agrValue=formAgr.checked; 
+        
+        if ( !agrValue) {//чекбокс должен быть включен
+            ar.textContent="Вы не согласились с публикацией отзывов";
+            ar.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            ar.textContent=""}
+    }  
+    var dc=document.createElement('span');//создаем пустой блок для вывода сообщений
+        desc.after(dc); 
+    function validateFormDesc(EO) {
+        EO=EO||window.event;
+        var formDesc=document.forms.f1.desc;
+        var descValue=formDesc.value; 
+        if ( !descValue||descValue.length<5) {//описание должно быть
+            dc.textContent="Вы не ввели описание сайта";
+            dc.style.color ="red";
+            EO.preventDefault();
+            }
+        else {
+            dc.textContent="";
+            }
+    }         
+    
+    var formTag=document.forms.f1; 
+    formTag.addEventListener('submit',validateInfoForm,false); // назначаем обработчик события submit
+
+    function validateInfoForm(EO) {
+        EO=EO||window.event;
+        try {
+            validateFormDev();
+            validateFormSite();
+            validateFormUrl();
+            validateFormDate();
+            validateFormCount();
+            validateFormMail();
+            validateFormCatalog();
+            validateFormCost();
+            validateFormAgr();
+            validateFormDesc();
+            if (d.textContent){
+            formDev.focus();
+            }        
+            else
+                if (s.textContent){
+                formSite.focus();
+                } 
+                else
+                    if (u.textContent){
+                    formUrl.focus();
+                    }       
+                    else
+                        if (dt.textContent){
+                        formDate.focus();
+                        }    
+                        else 
+                            if (c.textContent){
+                            formCount.focus();
+                            }   
+                            else 
+                                if (m.textContent){
+                                formMail.focus();
+                                }  
+                                else 
+                                    if (ct.textContent){
+                                    formCatalog.focus();
+                                    }     
+                                    else 
+                                        if (cost.textContent){
+                                        formCost1.focus();
+                                        }   
+                                        else 
+                                            if (ar.textContent){
+                                            formAgr.focus();
+                                            } 
+                                            else 
+                                                if (dc.textContent){
+                                                formDesc.focus();
+                                                }     
+        }
+        catch ( ex ) {
+            alert('Извините, что-то пошло не так, неожиданный сбой! Пересмотрите заполнение формы, возможно, это всё из-за вас!');
+            EO.preventDefault(); // что-то пошло не так - считаем что валидация не прошла
+        }
+    }
+    </script>
+    </body>
+</html>
