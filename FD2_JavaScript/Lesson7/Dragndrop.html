@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragndrop</title>
+    <style>
+        img{
+            width: 300px;
+        }
+    </style>
+    
+</head>
+<body>    
+    <div>
+        <img src="img1.jpeg">
+        <img src="img2.png" >
+        <img src="img3.jpg">
+        <img src="img4.jpg">
+        <img src="img5.jpg">
+    </div>
+<script>
+    "use strict";
+    window.addEventListener("load", dragnDrop, false);
+    function dragnDrop(EO) {
+        EO=EO||window.event;
+        var pict;
+        pict=document.getElementsByTagName('img');
+        console.log(pict);
+        
+        for ( i=pict.length-1; i=0; i-- ){
+            var elem=pict[i];
+            var elemLeft=elem.offsetLeft;
+            var elemTop=elem.offsetTop; 
+            elem.style.position='absolute';
+            elem.style.left=elemLeft;
+            elem.style.top=elemTop;            
+        };
+    }
+    </script>
+    </body>
+</html>

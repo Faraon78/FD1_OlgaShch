@@ -24,7 +24,7 @@
         <label for="count">Посетителей в сутки:</label><input type="text" name="count" id="count"><br>
         <label for="mail">E-mail для связи:</label><input type="email" name="mail" id="mail"><br>
         <label for="catalog">Рубрика каталога:</label><select id="catalog" name="catalog"> 
-            <option value="0"></option>
+            
             <option value="1">здоровье</option>
             <option value="2">домашний уют</option>
             <option value="3">бытовая техника</option>
@@ -55,13 +55,13 @@
     var formMail=document.forms.f1.mail; 
     formMail.addEventListener('blur',validateFormMail); 
     var formCatalog=document.forms.f1.catalog; 
-    formCatalog.addEventListener('blur',validateFormCatalog); 
+    formCatalog.addEventListener('change',validateFormCatalog); 
     var formCost1=document.forms.f1.cost1;
-    formCost1.addEventListener('blur',validateFormCost); 
+    formCost1.addEventListener('change',validateFormCost); 
     var formCost2=document.forms.f1.cost2; 
-    formCost2.addEventListener('blur',validateFormCost); 
+    formCost2.addEventListener('change',validateFormCost); 
     var formCost3=document.forms.f1.cost3; 
-    formCost3.addEventListener('blur',validateFormCost); 
+    formCost3.addEventListener('change',validateFormCost); 
     var formAgr=document.forms.f1.agr; 
     formAgr.addEventListener('change',validateFormAgr); 
     var formDesc=document.forms.f1.desc; 
@@ -163,7 +163,7 @@
         EO=EO||window.event;
         var formCatalog=document.forms.f1.catalog;
         var catalogValue=formCatalog.value; 
-        if ( catalogValue=="0") {//значение должно быть выбрано из списка
+        if ( !catalogValue) {//значение должно быть выбрано из списка
             ct.textContent="Выберите значение из списка";
             ct.style.color ="red";
             EO.preventDefault();
