@@ -21,20 +21,39 @@
     </div>
 <script>
     "use strict";
-    window.addEventListener("load", dragnDrop, false);
-    function dragnDrop(EO) {
+    window.addEventListener("load", setPosition, false);
+    var image =document.getElementsByTagName('img');
+    image.onmousedown=dragStart();
+    //image.addEventListener("mouseup", dragnDrop);
+    function setPosition(EO) {
         EO=EO||window.event;
         var pict;
         pict=document.getElementsByTagName('img');
         console.log(pict);
         
-        for ( i=pict.length-1; i=0; i-- ){
+        for (var i=pict.length-1; i=0; i-- ){
             var elem=pict[i];
             var elemLeft=elem.offsetLeft;
             var elemTop=elem.offsetTop; 
             elem.style.position='absolute';
             elem.style.left=elemLeft;
             elem.style.top=elemTop;            
+        };
+    };
+    function dragStart(EO) {
+        EO=EO||window.event;
+        
+        var pictPos=getElementPos(EO);
+        var clickX=Math.round(EO.pageX-pictPos.left);
+        var clickY=Math.round(EO.pageY-pictPos.top);
+        console.log(pictPos, clickX, clickY)
+    
+    };
+    function getElementPos(elem) {
+        var bbox=elem.getBoundingClientRect();
+        return {
+            left: bbox.left+window.pageXOffset,
+            top: bbox.top+window.pageYOffset
         };
     }
     </script>
