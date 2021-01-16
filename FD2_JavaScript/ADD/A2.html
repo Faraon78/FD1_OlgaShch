@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2</title>
+</head>
+<body>
+    <script> 
+    var a=prompt('Введите любую строку');   
+    console.log("Начальная строка: #",a,"#");
+    function trimString(){
+        var b=a.indexOf(' ');
+        while(b<1){         //убираем пробелы в начале строки
+            a=a.replace(' ', '');
+            b=a.indexOf(' ');            
+        }
+        var c=a.length;
+        var e=a.lastIndexOf(' '); 
+        while(e>(c-2)){         //убираем пробелы в конце строки
+            a=a.substr(0,a.length-2);
+            e=a.lastIndexOf(' ');
+            c=a.length;            
+        }
+        return a
+    };
+    var d=trimString(a);
+    console.log("#",d,"#");
+    </script>
+</body>
+</html>

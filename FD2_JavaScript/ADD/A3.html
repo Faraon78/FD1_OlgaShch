@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A3</title>
+</head>
+<body>
+    <script> 
+    var a=prompt('Введите строку на проверку палиндрома');   
+    console.log("Начальная строка: #",a,"#");
+    function palindrom(){
+        a=a.toLowerCase();
+        a=a.trim();
+        var b=a.indexOf(' ');
+        while(b>-1){         //убираем пробелы в тексте
+            a=a.replace(' ', '');
+            b=a.indexOf(' ');            
+        }
+        b=a.indexOf('.');
+        while(b>-1){         //убираем точки в тексте
+            a=a.replace('.', '');
+            b=a.indexOf('.');            
+        }
+        b=a.indexOf(',');
+        while(b>-1){         //убираем запятые в тексте
+            a=a.replace(',', '');
+            b=a.indexOf(',');            
+        }
+        b=a.indexOf('!');
+        while(b>-1){         //убираем восклицательные знаки в тексте
+            a=a.replace('!', '');
+            b=a.indexOf('!');            
+        }
+        b=a.indexOf('?');
+        while(b>-1){         //убираем вопросительные знаки в тексте
+            a=a.replace('?', '');
+            b=a.indexOf('?');            
+        }
+        b=a.indexOf(':');
+        while(b>-1){         //убираем двоеточие в тексте
+            a=a.replace(':', '');
+            b=a.indexOf(':');            
+        }
+        b=a.indexOf(';');
+        while(b>-1){         //убираем точку с запятой в тексте
+            a=a.replace(';', '');
+            b=a.indexOf(';');            
+        }
+        b=a.indexOf('-');
+        while(b>-1){         //убираем тире в тексте
+            a=a.replace('-', '');
+            b=a.indexOf('-');            
+        }
+        b=a.indexOf('/');
+        while(b>-1){         //убираем слэш в тексте
+            a=a.replace('/', '');
+            b=a.indexOf('/');            
+        }
+        b=a.indexOf('ё');
+        while(b>-1){         //заменяем ё на е в тексте
+            a=a.replace('ё', 'е');
+            b=a.indexOf('ё');            
+        }
+        b=a.indexOf('ъ');
+        while(b>-1){         //заменяем ъ на ь в тексте
+            a=a.replace('ъ', 'ь');
+            b=a.indexOf('ъ');            
+        }
+
+        var c=a.length-1;
+        var d=0;
+        var dp=a.charCodeAt(d);
+        var cp=a.charCodeAt(c);
+        var k;
+        console.log((c-d), dp, cp);
+        
+        function compare(){
+            dp=a.charCodeAt(d);
+            cp=a.charCodeAt(c);
+            console.log((c-d), dp, cp);
+            if ((dp-cp)!=0)
+                return k=1;
+            else return k=0;    
+        }
+        do{ 
+            compare(c,d);
+            c=c-1;
+            d=d+1;}
+        while 
+            (k=0)
+         
+        console.log("преобразованная строка: #",a, "#")
+        return k
+    };
+    console.log("Конечная строка: #",palindrom(a), "#");
+    </script>
+</body>
+</html>
