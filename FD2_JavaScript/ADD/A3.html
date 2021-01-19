@@ -72,28 +72,34 @@
         var d=0;
         var dp=a.charCodeAt(d);
         var cp=a.charCodeAt(c);
-        var k;
-        console.log((c-d), dp, cp);
+        var k=1;
         
-        function compare(){
+        function compare(){    //функция берет юникоды указанных символов и сравнивает их
             dp=a.charCodeAt(d);
             cp=a.charCodeAt(c);
-            console.log((c-d), dp, cp);
-            if ((dp-cp)!=0)
-                return k=1;
-            else return k=0;    
-        }
-        do{ 
-            compare(c,d);
-            c=c-1;
-            d=d+1;}
-        while 
-            (k=0)
-         
-        console.log("преобразованная строка: #",a, "#")
-        return k
+            if ((dp-cp)!=0){
+                k=0 
+                }
+            else (k=1);
+            return k    
+        };
+        var p=a.length/2;
+        console.log(p);        //Этот цикл должен запускать сравнение символов (вначале крайних по бокам), а затем симмитрично сдвигаться к центру строки 
+        while ( d<p && k ){   //здесь необходимо проверять 2 условия: что мы не дошли до середины строки и сравние должно прекратиться
+            compare(c,d);      //и что функция compare вернула false, и это значит что строка не является палиндромом и надо прекращать цикл. 
+            console.log(c, d, k);
+            c--;
+            d++;            
+        };   
+        return k  
+
+    return k
+               
     };
-    console.log("Конечная строка: #",palindrom(a), "#");
+    
+    palindrom(a);
+    console.log(k); 
+    console.log("Преобразованная строка: #",a,"#");
     </script>
 </body>
 </html>
