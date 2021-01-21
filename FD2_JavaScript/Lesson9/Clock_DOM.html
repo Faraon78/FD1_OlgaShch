@@ -10,7 +10,7 @@
   
 <script>
     "use strict";
-    var d=400;      //диаметр циферблата, от этого параметра зависят все остальные, если изменить его, изменится масштаб всех часов
+    var d=500;      //диаметр циферблата, от этого параметра зависят все остальные, если изменить его, изменится масштаб всех часов
     var r1=d/2;     // радиус большого циферблата
     var n=0.1*d;    //диаметр круга под цифры
     var r2=n/2;     // радиус круга под цифры
@@ -35,23 +35,61 @@
 
     
     for(var i=1; i<13; i++ ){
-        var elem=document.createElement('div');
-        var num=elem[i];        
-        num.style.backgroundcolor='green';
+        var num=document.createElement('div');
+        num.style.backgroundColor='green';
         num.style.width=n+"px";
         num.style.height=n+"px";
         num.style.position="absolute";
         num.style.textAlign='center';
         num.style.borderRadius='50%';
         var angle=i*30/180*Math.PI;
-        num.style.left=(r1-r2-p)+(r1-r2-p)*Math.sin(angle)+r2+'px';
-        num.style.top=(r1-r2-p)-(r1-r2-p)*Math.cos(angle)+r2+'px';
+        num.style.left=Math.round((r1-r2-p)+(r1-r2-p)*Math.sin(angle)+r2)+'px';
+        num.style.top=Math.round((r1-r2-p)-(r1-r2-p)*Math.cos(angle)+r2)+'px';
         num.textContent=i;
         num.style.fontSize=c+'px';
-        cir.appendChild(elem);
+        cir.appendChild(num);
     };
+    var arrC=document.createElement('div');   //Создаем часовую стрелку
+    arrC.style.borderRadius='25%';
+    arrC.style.backgroundColor="rgb(34, 34, 146)";
+    arrC.style.width=wC+"px";
+    arrC.style.height=lC+"px";
+    arrC.style.id="arrC";
+    arrC.style.position="absolute";
+    arrC.style.left=Math.round(d/2-(wC/2))+'px';
+    arrC.style.top=Math.round(r1-lC+x)+'px';
+    var originC=(lC-x)/lC*100;
+    arrC.style.transformOrigin='50% '+ originC+'%' ;
 
+    var arrM=document.createElement('div');   //Создаем минутную стрелку
+    arrM.style.borderRadius='15%';
+    arrM.style.backgroundColor="rgb(34, 34, 146)";
+    arrM.style.width=wM+"px";
+    arrM.style.height=lM+"px";
+    arrM.style.id="arrM";
+    arrM.style.position="absolute";
+    arrM.style.left=Math.round(d/2-(wM/2))+'px';
+    arrM.style.top=Math.round(r1-lM+x)+'px';
+    var originM=(lM-x)/lM*100;
+    arrM.style.transformOrigin='50% '+ originM+'%' ;
+
+    var arrS=document.createElement('div');   //Создаем секундную стрелку
+    arrS.style.borderRadius='25%';
+    arrS.style.backgroundColor="rgb(34, 34, 146)";
+    arrS.style.width=wS+"px";
+    arrS.style.height=lS+"px";
+    arrS.style.id="arrS";
+    arrS.style.position="absolute";
+    arrS.style.left=Math.round(d/2-(wS/2))+'px';
+    arrS.style.top=Math.round(r1-lS+x)+'px';
+    var originS=(lS-x)/lS*100;
+    arrS.style.transformOrigin='50% '+ originS+'%' ;
     
+        
+    cont.appendChild(cir);         // подвешиваем все элементы к DOM-дереву
+    cir.appendChild(arrC);
+    cir.appendChild(arrM);
+    cir.appendChild(arrS);
 
     setInterval(updateTime,1000);     // создаем онлайн-часы
     var clock1=document.createElement('div');
@@ -64,7 +102,10 @@
         clock1.style.top=d/4+'px';
         clock1.style.fontSize=c+'px';
         clock1.style.width=d+"px";
+
+        updateSecond(currTime);
     }
+    cir.appendChild(clock1);
 
 function formatDateTime(dt) {
         
@@ -72,6 +113,7 @@ function formatDateTime(dt) {
         var minutes=dt.getMinutes();
         var seconds=dt.getSeconds();
         return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
+        
     }
 
     // дополняет строку Val слева нулями до длины Len
@@ -82,43 +124,32 @@ function formatDateTime(dt) {
         return strVal;
     }
 
-    var arrC=document.createElement('div');   //Создаем часовую стрелку
-    arrC.style.borderRadius='25%';
-    arrC.style.backgroundColor='black';
-    arrC.style.width=wC+"px";
-    arrC.style.height=lC+"px";
-    arrC.style.id="arrC";
-    arrC.style.position="absolute";
-    arrC.style.left=d/2-(wC/2)+'px';
-    arrC.style.top=r1-lC+x+'px';
+    updateSecond();    // расставляем первоначально все стрелки на часах
+    updateMinute();
+    updateHours();
 
-    var arrM=document.createElement('div');   //Создаем минутную стрелку
-    arrM.style.borderRadius='25%';
-    arrM.style.backgroundColor='black';
-    arrM.style.width=wM+"px";
-    arrM.style.height=lM+"px";
-    arrM.style.id="arrM";
-    arrM.style.position="absolute";
-    arrM.style.left=d/2-(wM/2)+'px';
-    arrM.style.top=r1-lM+x+'px';
-
-    var arrS=document.createElement('div');   //Создаем секундную стрелку
-    arrS.style.borderRadius='25%';
-    arrS.style.backgroundColor='black';
-    arrS.style.width=wS+"px";
-    arrS.style.height=lS+"px";
-    arrS.style.id="arrS";
-    arrS.style.position="absolute";
-    arrS.style.left=d/2-(wS/2)+'px';
-    arrS.style.top=r1-lS+x+'px';
-    
-        
-    cont.appendChild(cir);         // подвешиваем все элементы к DOM-дереву
-    
-    cir.appendChild(clock1);
-    cir.appendChild(arrC);
-    cir.appendChild(arrM);
-    cir.appendChild(arrS);
+    function updateSecond(){            //Обновляем секундную стрелку 1 раз в секунду
+        var currTime=new Date();
+        var sec=currTime.getSeconds();
+        var angleS=6*sec;
+        arrS.style.transform=`rotate(${angleS}deg)`;
+    };
+    setInterval(updateMinute,10000);    //Обновляем минутную стрелку 1 раз в 10 секунд
+    function updateMinute(){
+        var currTime=new Date();
+        var sec=currTime.getSeconds();
+        var min=currTime.getMinutes();
+        var angleM=6*min+0.1*sec;
+        arrM.style.transform=`rotate(${angleM}deg)`;
+    }
+    setInterval(updateHours,300000);    //Обновляем часовую стрелку 1 раз в 5 минут
+    function updateHours(){
+        var currTime=new Date();
+        var hou=currTime.getHours();
+        var min=currTime.getMinutes();
+        var angleC=30*hou+0.5*min;
+        arrC.style.transform=`rotate(${angleC}deg)`;
+    }
 
 </script>
 
