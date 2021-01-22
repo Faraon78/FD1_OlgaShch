@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock_DOM</title>
+    <title>Clock_SVG</title>
 </head>
 <body>    
    <div id="cont"> </div> 
   
 <script>
     "use strict";
-    var d=500;      //диаметр циферблата, от этого параметра зависят все остальные, если изменить его, изменится масштаб всех часов
+    var d=470;      //диаметр циферблата, от этого параметра зависят все остальные, если изменить его, изменится масштаб всех часов
     var r1=d/2;     // радиус большого циферблата
     var n=0.1*d;    //диаметр круга под цифры
     var r2=n/2;     // радиус круга под цифры
-    var c=n*0.8;    //размер шрифта цифры
+    var c=n*0.7;    //размер шрифта цифры
     var p=d/20;     // отступ от края циферблата до круга с цифрой
     var lC=r1*0.6;  //длина часовой стрелки
     var wC=n/3;       // ширина часовой стрелки
@@ -23,48 +23,63 @@
     var lS=r1*0.9;  // длина секундной стрелки
     var wS=wM/2;       // ширина секундной стрелки
     var x=r1/10;      //величина, на которую стрелка выступает за центральную ось  
-
+    const xmlns = "http://www.w3.org/2000/svg";
     
-    var cir=document.createElement('div');   //Создаем большой циферблат
-    cir.style.borderRadius='50%';
-    cir.style.backgroundColor='yellow';
-    cir.style.width=d+"px";
-    cir.style.height=d+"px";
-    cir.style.display="inline-block";
-    cir.style.position="absolute";
+    var pict=document.createElementNS(xmlns, 'svg');   //создаем тег SVG
+    pict.setAttribute("width", d)
+    pict.setAttribute("height", d);
+    
+
+    var cir=document.createElementNS(xmlns, "circle");      //Создаем большой циферблат
+    cir.setAttribute('fill', 'yellow');
+    cir.setAttribute('cx', r1);
+    cir.setAttribute('cy', r1);
+    cir.setAttribute('r', r1);
+    cont.appendChild(pict);         // подвешиваем все элементы к DOM-дереву
+    pict.appendChild(cir);
 
     
     for(var i=1; i<13; i++ ){
-        var num=document.createElement('div');
-        num.style.backgroundColor='green';
-        num.style.width=n+"px";
-        num.style.height=n+"px";
-        num.style.position="absolute";
-        num.style.textAlign='center';
-        num.style.borderRadius='50%';
+        var num=document.createElementNS(xmlns, "circle");
+        num.setAttribute('fill', 'green');
+        num.setAttribute('r', r2);
         var angle=i*30/180*Math.PI;
-        num.style.left=Math.round((r1-r2-p)+(r1-r2-p)*Math.sin(angle)+r2)+'px';
-        num.style.top=Math.round((r1-r2-p)-(r1-r2-p)*Math.cos(angle)+r2)+'px';
-        num.textContent=i;
-        num.style.fontSize=c+'px';
-        cir.appendChild(num);
+        var x=Math.round(r1-p+(r1-r2-p)*Math.sin(angle)+r2);
+        var y=Math.round(r1-p-(r1-r2-p)*Math.cos(angle)+r2);
+        num.setAttribute('cx', x );
+        num.setAttribute('cy', y);
+        var txt=document.createElementNS(xmlns, "text");
+        txt.setAttribute("x",x-r2/2);
+        txt.setAttribute("y",y+r2/2);
+        txt.textContent=i;
+        txt.style.fill="black";
+        txt.style.fontSize=c;
+        //num.style.fontSize=c+'px';
+        pict.appendChild(num);
+        pict.appendChild(txt);
     };
-    var arrC=document.createElement('div');   //Создаем часовую стрелку
-    arrC.style.borderRadius='25%';
-    arrC.style.backgroundColor="rgb(34, 34, 146)";
-    arrC.style.width=wC+"px";
-    arrC.style.height=lC+"px";
-    arrC.style.position="absolute";
-    arrC.style.left=Math.round(d/2-(wC/2))+'px';
-    arrC.style.top=Math.round(r1-lC+x)+'px';
+    var arrC=document.createElementNS(xmlns, "rect");   //Создаем часовую стрелку
+    var xc=Math.round(d/2-(wC/2));
+    var yc=Math.round(r1-lC+x);
+    arrC.setAttribute('x', xc);
+    arrC.setAttribute('y', yc);
+    arrC.setAttribute('width', wC);
+    arrC.setAttribute('height', lC);
+    arrC.setAttribute('rx', '10');
+    arrC.setAttribute('ry', '10');
+    arrC.setAttribute('fill',"black");
+    
+    
     var originC=(lC-x)/lC*100;
-    arrC.style.transformOrigin='50% '+ originC+'%' ;
+    //arrC.setAttribute.transform( 'rotate', 50) ;
+    pict.appendChild(arrC);
 
     var arrM=document.createElement('div');   //Создаем минутную стрелку
     arrM.style.borderRadius='15%';
     arrM.style.backgroundColor="rgb(34, 34, 146)";
     arrM.style.width=wM+"px";
     arrM.style.height=lM+"px";
+    arrM.style.id="arrM";
     arrM.style.position="absolute";
     arrM.style.left=Math.round(d/2-(wM/2))+'px';
     arrM.style.top=Math.round(r1-lM+x)+'px';
@@ -76,6 +91,7 @@
     arrS.style.backgroundColor="rgb(34, 34, 146)";
     arrS.style.width=wS+"px";
     arrS.style.height=lS+"px";
+    arrS.style.id="arrS";
     arrS.style.position="absolute";
     arrS.style.left=Math.round(d/2-(wS/2))+'px';
     arrS.style.top=Math.round(r1-lS+x)+'px';
@@ -83,36 +99,26 @@
     arrS.style.transformOrigin='50% '+ originS+'%' ;
     
         
-    cont.appendChild(cir);         // подвешиваем все элементы к DOM-дереву
-    cir.appendChild(arrC);
+    
+    pict.appendChild(arrC);
     cir.appendChild(arrM);
     cir.appendChild(arrS);
 
-     
-    var clock1=document.createElement('div');    // создаем онлайн-часы
-    clock1.style.position="absolute";
-    clock1.style.textAlign='center';
-    clock1.style.top=d/4+'px';
-    clock1.style.fontSize=c+'px';
-    clock1.style.width=d+"px";
-    cir.appendChild(clock1);
-
-    var count=0;
-    setInterval(updateTime,1000);      //Заводим таймер для обновления часов 
+    setInterval(updateTime,1000);     // создаем онлайн-часы
+    var clock1=document.createElement('div');
     function updateTime() {
         var currTime=new Date();
         var currTimeStr=formatDateTime(currTime);
         clock1.innerHTML=currTimeStr;
-        count ++;                        // счетчик секунд для обновления стрелок
-        updateSecond(currTime);         //Обновляем секундную стрелку 1 раз в секунду
-        if (count%10== 0){               //Обновляем минутную стрелку 1 раз в 10 секунд
-            updateMinute(currTime);       
-        };
-        if (count%300 == 0){           //Обновляем часовую стрелку 1 раз в 5 минут
-            updateHours(currTime);
-        };
+        clock1.style.position="absolute";
+        clock1.style.textAlign='center';
+        clock1.style.top=d/4+'px';
+        clock1.style.fontSize=c+'px';
+        clock1.style.width=d+"px";
+
+        updateSecond(currTime);
     }
-    
+    cir.appendChild(clock1);
 
 function formatDateTime(dt) {
         
@@ -134,24 +140,23 @@ function formatDateTime(dt) {
     updateSecond();    // расставляем первоначально все стрелки на часах
     updateMinute();
     updateHours();
-    updateTime();
 
-    function updateSecond(){            //Обновляем секундную стрелку 
+    function updateSecond(){            //Обновляем секундную стрелку 1 раз в секунду
         var currTime=new Date();
         var sec=currTime.getSeconds();
         var angleS=6*sec;
         arrS.style.transform=`rotate(${angleS}deg)`;
     };
-        
-    function updateMinute(){         //Обновляем минутную стрелку 
+    setInterval(updateMinute,10000);    //Обновляем минутную стрелку 1 раз в 10 секунд
+    function updateMinute(){
         var currTime=new Date();
         var sec=currTime.getSeconds();
         var min=currTime.getMinutes();
         var angleM=6*min+0.1*sec;
         arrM.style.transform=`rotate(${angleM}deg)`;
     }
-                                
-    function updateHours(){       //Обновляем часовую стрелку 
+    setInterval(updateHours,300000);    //Обновляем часовую стрелку 1 раз в 5 минут
+    function updateHours(){
         var currTime=new Date();
         var hou=currTime.getHours();
         var min=currTime.getMinutes();
