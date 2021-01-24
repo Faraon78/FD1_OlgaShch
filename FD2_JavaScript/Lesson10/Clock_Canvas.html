@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock_Canvas</title>
+</head>
+<body>    
+   <canvas id="cont"> Обновите браузер</canvas> 
+  
+<script>
+    //"use strict";
+    var d=500;      //диаметр циферблата, от этого параметра зависят все остальные, если изменить его, изменится масштаб всех часов
+    var r1=d/2;     // радиус большого циферблата
+    var n=0.1*d;    //диаметр круга под цифры
+    var r2=n/2;     // радиус круга под цифры
+    var c=n*0.7;    //размер шрифта цифры
+    var p=d/20;     // отступ от края циферблата до круга с цифрой
+    var lC=r1*0.6;  //длина часовой стрелки
+    var wC=n/3;       // ширина часовой стрелки
+    var lM=r1*0.8;  // длина минутной стрелки
+    var wM=wC/2;       // ширина минутной стрелки
+    var lS=r1*0.9;  // длина секундной стрелки
+    var wS=wM/2;       // ширина секундной стрелки
+    var xx=r1/10;      //величина, на которую стрелка выступает за центральную ось  
+       
+    function updatePict(){
+        var cvs=document.getElementById('cont');
+        var context=cvs.getContext('2d');
+        cvs.setAttribute('width', d);                                 //устанавливаем длину и ширину всего блока Canvas
+        cvs.setAttribute('height', d);  
+        context.fillStyle='yellow';                //рисуем желтый циферблат
+        context.beginPath();
+        var xr=r1;
+        var yr=r1;
+        context.arc(xr, yr, r1, 0, Math.PI*2, false);
+        context.fill();
+        
+        for(var i=1; i<13; i++ ){                   //рисуем круги с цифрами
+        var angle=i*(360/12)/180*Math.PI;
+        var xi=Math.round(r1+(r1-r2-p)*Math.sin(angle));
+        var yi=Math.round(r1-(r1-r2-p)*Math.cos(angle));
+        context.fillStyle='green';               
+        context.beginPath();
+        context.arc(xi, yi, r2, 0,Math.PI*2, false);
+        context.fill();        
+        context.fillStyle='black';
+        context.font='normal '+c+'px Arial';        
+        context.textAlign='center';
+        context.textBaseline='middle';
+        context.fillText(i, xi, yi);
+        };
+        var currTime=new Date();
+        var sec=currTime.getSeconds();            //начинаем создавать секундную стрелку  
+        var angleS=(sec*360/60)/180*Math.PI;              //угол для длинного конца секундной стрелки
+        var angleSE=(sec*360/60+180)/180*Math.PI;           ////угол для короткого конца секундной стрелки
+        var xs=r1+(lS-xx)*Math.sin(angleS);       //координаты для длинного конца секундной стрелки
+        var ys=r1-(lS-xx)*Math.cos(angleS);
+        var xse=r1+(xx)*Math.sin(angleSE);       //координаты для короткого конца секундной стрелки
+        var yse=r1-(xx)*Math.cos(angleSE);
+        context.lineCap='round';    //Создаем секундную стрелку 
+        context.lineWidth=wS;
+        context.fillStyle='black';  
+        context.strokeStyle='black'; 
+        context.beginPath();       //Создаем длинный конец секундной стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xs,ys);
+        context.stroke();
+
+        context.beginPath();       //Создаем короткий конец секундной стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xse,yse);        
+        context.stroke();
+
+        var min=currTime.getMinutes();               //начинаем создавать минутную стрелку  
+        var angleM=(min*360/60+sec*360/60/60)/180*Math.PI;              //угол для длинного конца минутной стрелки
+        var angleME=(min*360/60+sec*360/60/60+180)/180*Math.PI;           ////угол для короткого конца минутной стрелки
+        var xm=r1+(lM-xx)*Math.sin(angleM);       //координаты для длинного конца минутной стрелки
+        var ym=r1-(lM-xx)*Math.cos(angleM);
+        var xme=r1+(xx)*Math.sin(angleME);       //координаты для короткого конца минутной стрелки
+        var yme=r1-(xx)*Math.cos(angleME);
+        context.lineCap='round';    //Создаем минутную стрелку 
+        context.lineWidth=wM;
+        context.beginPath();       //Создаем длинный конец минутной стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xm,ym);
+        context.stroke();
+
+        context.beginPath();       //Создаем короткий конец минутной стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xme,yme);        
+        context.stroke();
+
+        var hou=currTime.getHours();              //начинаем создавать часовую стрелку  
+        var angleH=(hou*360/12+ min*360/60/60)/180*Math.PI;              //угол для длинного конца часовой стрелки
+        var angleHE=(hou*360/12+ min*360/60/60)/180*Math.PI;           ////угол для короткого конца часовой стрелки
+        var xh=r1+(lC-xx)*Math.sin(angleH);       //координаты для длинного конца часовой стрелки
+        var yh=r1-(lC-xx)*Math.cos(angleH);
+        var xhe=r1+(xx)*Math.sin(angleHE);       //координаты для короткого конца часовой стрелки
+        var yhe=r1-(xx)*Math.cos(angleHE);
+        context.lineCap='round';    //Создаем часовую стрелку 
+        context.lineWidth=wC;
+        context.beginPath();       //Создаем длинный конец часовой стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xh,yh);
+        context.stroke();
+
+        context.beginPath();       //Создаем короткий конец часовой стрелки
+        context.moveTo(r1,r1);
+        context.lineTo(xhe,yhe);        
+        context.stroke();
+
+        function formatDateTime(dt) {
+        
+        var hours=dt.getHours();
+        var minutes=dt.getMinutes();
+        var seconds=dt.getSeconds();
+        return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
+        
+        }
+
+    // дополняет строку Val слева нулями до длины Len
+    function str0l(val,len) {
+        var strVal=val.toString();
+        while ( strVal.length < len )
+            strVal='0'+strVal;
+        return strVal;
+    }
+        var currTimeStr=formatDateTime(currTime);
+        var ycl=d/3.5;
+        context.fillText(currTimeStr, r1, ycl);    //вставляем электронные часы
+        
+    };
+    updatePict();
+    
+    
+    setInterval(updatePict,1000);      //Заводим таймер для обновления часов 
+    
+
+
+
+    
+     
+
+</script>
+
+    </body>
+</html>
