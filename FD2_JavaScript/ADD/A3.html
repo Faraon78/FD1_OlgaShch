@@ -72,15 +72,15 @@
         var d=0;
         var dp=a.charCodeAt(d);
         var cp=a.charCodeAt(c);
-        var k=1;
+        var k=true;
         
         function compare(){    //функция берет юникоды указанных символов и сравнивает их
             dp=a.charCodeAt(d);
             cp=a.charCodeAt(c);
             if ((dp-cp)!=0){
-                k=0 
+                k=false 
                 }
-            else (k=1);
+            else (k=true);
             return k    
         };
         var p=a.length/2;
@@ -89,16 +89,19 @@
             compare(c,d);      //и что функция compare вернула false, и это значит что строка не является палиндромом и надо прекращать цикл. 
             console.log(c, d, k);
             c--;
-            d++;            
+            d++;  
+            
         };   
-        return k  
-
-    return k
-               
-    };
-    
+        console.log(k);
+        if (!k){
+            alert('Ваша фраза не является палиндромом')
+        } 
+        else  alert('Ваша фраза является палиндромом') 
+        return k               
+    };    
     palindrom(a);
-    console.log(k); 
+     
+    
     console.log("Преобразованная строка: #",a,"#");
     </script>
 </body>
