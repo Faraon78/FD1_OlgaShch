@@ -6,56 +6,73 @@
     <title>Dragndrop</title>
     <style>
         img{
-            width: 300px;
+            width: 200px;
         }
     </style>
     
 </head>
 <body>    
-    <div>
+    <div id="cont">
         <img src="img1.jpeg">
-        <img src="img2.png" >
+        <img src="img2.png">
         <img src="img3.jpg">
         <img src="img4.jpg">
         <img src="img5.jpg">
     </div>
+    
+
 <script>
     "use strict";
+    
     window.addEventListener("load", setPosition, false);
     var image =document.getElementsByTagName('img');
-    image.onmousedown=dragStart();
-    //image.addEventListener("mouseup", dragnDrop);
     function setPosition(EO) {
         EO=EO||window.event;
-        var pict;
-        pict=document.getElementsByTagName('img');
-        console.log(pict);
+        var elems=document.getElementsByTagName('img');
         
-        for (var i=pict.length-1; i=0; i-- ){
-            var elem=pict[i];
-            var elemLeft=elem.offsetLeft;
-            var elemTop=elem.offsetTop; 
+        
+        for (var i=elems.length-1; i>=0; i-- ){
+            var elem=elems[i];
             elem.style.position='absolute';
-            elem.style.left=elemLeft;
-            elem.style.top=elemTop;            
+            elem.style.left=elem.offsetLeft+'px';
+            elem.style.top=elem.offsetTop+'px'; 
+            elem.onmousedown = imgMouseDown;
+            elem.onmouseup = imgMouseUp;
         };
-    };
-    function dragStart(EO) {
-        EO=EO||window.event;
         
-        var pictPos=getElementPos(EO);
-        var clickX=Math.round(EO.pageX-pictPos.left);
-        var clickY=Math.round(EO.pageY-pictPos.top);
-        console.log(pictPos, clickX, clickY)
-    
     };
-    function getElementPos(elem) {
-        var bbox=elem.getBoundingClientRect();
-        return {
-            left: bbox.left+window.pageXOffset,
-            top: bbox.top+window.pageYOffset
-        };
+        function imgMouseDown(EO) {
+        EO = EO || window.event;
+        EO.preventDefault();
+        
+ 
+        var moveX = EO.pageX - EO.target.offsetLeft;
+        var moveY = EO.pageY - EO.target.offsetTop; 
+        var cont = document.getElementById('cont');
+        var pict = EO.target;
+        cont.appendChild(pict);
+ 
+ 
+    window.onmousemove = imgMouseMove; 
+    function imgMouseMove(EO) {
+      EO = EO || window.event;
+      EO.preventDefault();      
+ 
+      pict.style.top = (EO.pageY - moveY) + 'px';
+      pict.style.left = (EO.pageX - moveX) + 'px';
+ 
     }
+  }
+ 
+  function imgMouseUp(EO) {
+    EO.preventDefault();
+     
+    window.onmousemove = null; 
+ 
+  }
+ 
+ 
+
     </script>
     </body>
 </html>

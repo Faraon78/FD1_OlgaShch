@@ -5,35 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>example</title>
     <style>
-        div {
-            width: 600px;
-            height: 600px;
+        .screen {
+            display:grid;            
+            grid-template-columns: 1fr, 4fr;
         }
-        #r1{
-            background-image: url(rt1.png);
+        .sample {
+            grid-column: 1;
+            grid-row: 1;
+            height: 400px;
+            border: solid blue;
+            margin-bottom: 5px;
+            margin-right: 5px;
         }
-        #r2{
-            background-image: url(rt2.png);
+        .menu {
+            grid-column: 1;
+            grid-row: 2;
+            border: solid blue;
+            margin-right: 5px;
         }
-        #r3{
-            background-image: url(rt3.png);
+        .main {
+            grid-column: 2;
+            grid-row: 1;
+            border: solid blue;
+            margin-bottom: 5px;
+            align-items: center;
+            vertical-align: middle;
+            /*display: flex;*/
+            justify-content: center;
         }
-        /*#r4{
-            background-image: url(rt2.png);
-        }*/
+        div .place {
+            width: 300px;
+            height: 300px;
+            display: inline-block;
+            border: 2px  dashed  #6b336b;
+            text-align: center;
+          
+        }
+        .plate {
+            grid-column: 2;
+            grid-row: 2;
+            border: solid blue;
+        }
+        .plate img{
+            width: 200px;
+            height: 200px;
+            border:thistle solid;
+            margin: 2px;
+            float: left;
+            background-size: 100%;
+        }
+                
     </style>
 </head>
-<body>    
-   
-   <div id='r1'>
-       <div id='r2'>
-           <div id='r3'>
-               <div id='r4'></div>
-           </div>
-       </div>
+<body>
+<div class="screen">   
+   <div class="sample">Здесь будет образец рисунка</div>
+   <div class="menu">Здесь будут кнопки управления</div>
+   <div class="main">
+       <div class='place'>Перетащите пластинки сюда</div>
    </div>
-  
+   <div class="plate">
+        <img id='r1' src="Images/rt1.png">
+        <img id='r2' src="Images/rt2.png">
+        <img id='r3' src="Images/rt3.png">
+    </div>      
+</div> 
 
-
+<script>
+    "use strict";
+    window.addEventListener("load", setPosition, false);
+    var image =document.getElementsByTagName('img');
+    //image.onmousedown=dragStart();
+    //image.addEventListener("mouseup", dragnDrop);
+    function setPosition(EO) {
+        EO=EO||window.event;
+        var pict;
+        pict=document.getElementsByTagName('img');
+        console.log(pict);
+        
+        for (var i=pict.length-1; i=0; i-- ){
+            var elem=pict[i];
+            var elemLeft=elem.offsetLeft;
+            var elemTop=elem.offsetTop; 
+            elem.style.float='none';
+            elem.style.position='absolute';
+            elem.style.left=elemLeft;
+            elem.style.top=elemTop;            
+        };
+    };
+    //function dragStart(EO) {
+    //    EO=EO||window.event;
+        
+    //    var pictPos=getElementPos(EO);
+    //    var clickX=Math.round(EO.pageX-pictPos.left);
+    //    var clickY=Math.round(EO.pageY-pictPos.top);
+    //    console.log(pictPos, clickX, clickY)
+    
+    //};
+    //function getElementPos(elem) {
+    //    var bbox=elem.getBoundingClientRect();
+    //    return {
+    //        left: bbox.left+window.pageXOffset,
+    //        top: bbox.top+window.pageYOffset
+    //    };
+    //}
+    </script>
     </body>
 </html>
