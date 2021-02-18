@@ -9,54 +9,18 @@
     <script> 
     var a=prompt('Введите строку на проверку палиндрома');   
     console.log("Начальная строка: #",a,"#");
-    function palindrom(){
-        a=a.toLowerCase();
-        a=a.trim();
-        var b=a.indexOf(' ');
-        while(b>-1){         //убираем пробелы в тексте
-            a=a.replace(' ', '');
-            b=a.indexOf(' ');            
-        }
-        b=a.indexOf('.');
-        while(b>-1){         //убираем точки в тексте
-            a=a.replace('.', '');
-            b=a.indexOf('.');            
-        }
-        b=a.indexOf(',');
-        while(b>-1){         //убираем запятые в тексте
-            a=a.replace(',', '');
-            b=a.indexOf(',');            
-        }
-        b=a.indexOf('!');
-        while(b>-1){         //убираем восклицательные знаки в тексте
-            a=a.replace('!', '');
-            b=a.indexOf('!');            
-        }
-        b=a.indexOf('?');
-        while(b>-1){         //убираем вопросительные знаки в тексте
-            a=a.replace('?', '');
-            b=a.indexOf('?');            
-        }
-        b=a.indexOf(':');
-        while(b>-1){         //убираем двоеточие в тексте
-            a=a.replace(':', '');
-            b=a.indexOf(':');            
-        }
-        b=a.indexOf(';');
-        while(b>-1){         //убираем точку с запятой в тексте
-            a=a.replace(';', '');
-            b=a.indexOf(';');            
-        }
-        b=a.indexOf('-');
-        while(b>-1){         //убираем тире в тексте
-            a=a.replace('-', '');
-            b=a.indexOf('-');            
-        }
-        b=a.indexOf('/');
-        while(b>-1){         //убираем слэш в тексте
-            a=a.replace('/', '');
-            b=a.indexOf('/');            
-        }
+    function palindrom(a){
+        b=a.toLowerCase().trim();
+        var v={' ':true,'.':true,',':true,'!':true,'?':true,':':true,';':true,'-':true,'/':true,'*':true};
+        for (var i=0;
+             i<b.length; 
+             i++ ){
+        var p=b[i];
+        if (p in v)
+            b=b.replace(v, '') ;   
+        };
+           
+        
         b=a.indexOf('ё');
         while(b>-1){         //заменяем ё на е в тексте
             a=a.replace('ё', 'е');

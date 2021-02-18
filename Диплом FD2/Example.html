@@ -5,110 +5,640 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>example</title>
     <style>
+        body{
+            height: 100%;
+        }
         .screen {
             display:grid;            
             grid-template-columns: 1fr, 4fr;
+            width: 100%;
+            background-image: url('Images/gradient.png');
         }
         .sample {
             grid-column: 1;
             grid-row: 1;
-            height: 400px;
-            border: solid blue;
+            height: 350px;
+            border: solid  rgb(10, 212, 248);
             margin-bottom: 5px;
             margin-right: 5px;
+            align-items: center;
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
         }
+        
         .menu {
             grid-column: 1;
             grid-row: 2;
-            border: solid blue;
+            border: solid rgb(10, 212, 248);
             margin-right: 5px;
+            height: 500px;
+           
+            text-align: center;
+        }
+        .menu div{
+            align-items: center;
+            margin: 10px;
         }
         .main {
+            
             grid-column: 2;
             grid-row: 1;
-            border: solid blue;
+            border: solid rgb(10, 212, 248);
             margin-bottom: 5px;
             align-items: center;
             vertical-align: middle;
-            /*display: flex;*/
+            display: flex;
             justify-content: center;
         }
-        div .place {
-            width: 300px;
-            height: 300px;
+        #place {
             display: inline-block;
-            border: 2px  dashed  #6b336b;
+            border:#d8bfd8 solid;
             text-align: center;
+            position: relative;
+            border-radius: 5px;
+            /*background-color: rgb(250, 227, 246);*/
+            transform: translateZ(0);
           
+        }
+        #sam{
+            display: inline-block;
+            height: 300px;
+            width: 300px;
+            border: 2px  dashed thistle solid;
+            position: relative;
+            /*background-color:rgb(250, 227, 246);*/
+            transform: translateZ(0);
+            transition-duration: 3s;
+            border-radius: 3px;
         }
         .plate {
             grid-column: 2;
             grid-row: 2;
-            border: solid blue;
+            border: solid  #0ad4f8;
+            display: grid;
+                        
         }
-        .plate img{
-            width: 200px;
-            height: 200px;
-            border:thistle solid;
+        .plate div{
+            width: 150px;
+            height: 150px;
+        }
+        .plitki{
+            width: 130px;
+            height: 130px;
+            border:#d8bfd8 solid;
             margin: 2px;
-            float: left;
             background-size: 100%;
+            transition-duration: 1s;
+            border-radius: 5px;
         }
-                
+        #d1, #d2, #d3, #d4, #d5,#d6{
+            grid-row: 1;
+        }
+        input{
+            width: 200px;
+            height: 50px;
+            font-size: large;
+            border-radius: 3px;
+            background-color: rgb(209, 224, 243);
+            border-color:  #0ad4f8;
+            box-shadow: mediumturquoise 0 0 5px inset;
+        }
+                        
     </style>
 </head>
 <body>
-<div class="screen">   
-   <div class="sample">Здесь будет образец рисунка</div>
-   <div class="menu">Здесь будут кнопки управления</div>
-   <div class="main">
-       <div class='place'>Перетащите пластинки сюда</div>
-   </div>
-   <div class="plate">
-        <img id='r1' src="Images/rt1.png">
-        <img id='r2' src="Images/rt2.png">
-        <img id='r3' src="Images/rt3.png">
-    </div>      
+    
+<div class='screen' id='scr'>   
+    
+    <div class="sample">
+        <div id='sam'></div>
+    </div>
+    <div class="menu">
+        <div><input type="button" value="Подсказка" onclick="imgHelp()"> </div>
+        <div><input type="button" value="Предыдущее задание" onclick="imgPre()"> </div>
+        <div><input type="button" value="Следующее задание" onclick="imgNext()"></div>
+        <div><input type="button" value="Каталог заданий" onclick="imgChoice()"></div>
+    </div>
+    <div class="main">
+        
+        <div id='place'></div>
+        <div class='button'>
+            <input type="button" value="Повернуть пластинку" onclick="imgRotate()"> 
+            <input type="button" value="Убрать пластинку" onclick="imgDelete()">
+            <input type="button" value="Проверить" onclick="imgVerify()">
+        </div>
+    </div>
+    <div class="plate">
+        <div id='d1'><img id='r1' class='plitki' src="Images/rt1.png"></div>
+        <div id='d2'><img id='r2' class='plitki' src="Images/rt2.png"></div>
+        <div id='d3'><img id='r3' class='plitki' src="Images/rt3.png"></div>
+        <div id='d4'><img id='r4' class='plitki' src="Images/rt4.png"></div>
+        <div id='d5'><img id='r5' class='plitki' src="Images/rt5.png"></div>
+        <div id='d6'><img id='r6' class='plitki' src="Images/rt6.png"></div>
+        <div id='d7'><img id='r7' class='plitki' src="Images/rt7.png"></div>
+        <div id='d8'><img id='r8' class='plitki' src="Images/rt8.png"></div>
+        <div id='d9'><img id='r9' class='plitki' src="Images/rt9.png"></div>
+        <div id='d10'><img id='r10' class='plitki' src="Images/rt10.png"></div>
+        <div id='d11'><img id='r11' class='plitki' src="Images/rt11.png"></div>
+        <div id='d12'><img id='r12' class='plitki' src="Images/rt12.png"></div>
+        <div id='d13'><img id='r13' class='plitki' src="Images/rt13.png"></div>
+        <div id='d14'><img id='r14' class='plitki' src="Images/rt14.png"></div>
+        <div id='d15'><img id='r15' class='plitki' src="Images/rt15.png"></div>
+        <div id='d16'><img id='r16' class='plitki' src="Images/rt16.png"></div>
+        <div id='d17'><img id='r17' class='plitki' src="Images/rt17.png"></div>
+        <div id='d18'><img id='r18' class='plitki' src="Images/rt18.png"></div>
+    </div>         
 </div> 
-
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
 <script>
     "use strict";
+    var square=300;              //Устанавливаем размер "приемника" для плиток
+    var parSquare=130;           // Устанавливаем исходный размер для плиток
+    var helpSquare=square*0.5;  //уменьшение пластинок при разложении на подсказке
+    var choice=0;            //Переменная, в которой будет лежать номер образца задания при загрузке, по умолчанию самое первое из массива     
+
+    var place = document.getElementById('place');
+    place.style.width=square + 0 +'px';
+    place.style.height=square + 0 +'px';
+
+    var example=[                       //создаем массив с образцами заданий разной сложности, всего 85 заданий
+        [r2, 0, r6, 0],  // все значения парами: id плитки и угол поворота по часовой стрелке
+        [r9, 0, r5, 0],
+        [r2, 0, r12, 0],
+        [r13, 270, r10, 180],
+        [r12, 270, r6, 0],
+        [r10, 0, r9, 270],
+        [r12, 0, r15, 90],
+        [r1, 90, r14, 270],
+        [r13, 90, r7, 90],
+        [r8, 180, r1, 0],
+        [r5, 0, r8, 180],
+        [r2, 0, r15, 270],
+        [r9, 180, r13, 90],
+        [r5, 0, r6, 0, r8, 0],
+        [r4, 0, r17, 0, r16, 0],
+        [r9, 0, r6, 0, r10, 90],
+        [r7, 180, r13, 0, r2, 0],
+        [r4, 0, r1, 180, r16, 270],
+        [r6, 0, r14, 270, r15, 0],
+        [r5, 0, r3, 0],
+        [r2, 0, r6, 0, r12, 270],
+        [r14, 90, r1, 180, r7, 270],
+        [r7, 180, r13, 270, r11, 180],
+        [r8, 0, r9, 180, r16, 270],
+        [r9, 90, r10, 180, r17, 270],
+        [r6, 0, r16, 0, r1, 90],
+        [r7, 180, r4, 270, r10, 180],
+        [r5, 180, r13, 90, r17, 0],
+        [r2, 0, r11, 90, r10, 0],
+        [r13, 270, r12, 0, r15, 0],
+        [r14, 90, r5, 180, r17, 270],
+        [r18, 180, r12, 0, r4, 0],
+        [r5, 180, r1, 180, r17, 0],
+        [r2, 0, r15, 180, r11, 0],
+        [r18, 180, r11, 270, r4, 270],
+        [r10, 180, r4, 270, r3, 180],
+        [r8, 180, r12, 90, r17, 0],
+        [r9, 180, r11, 270, r14, 0],
+        [r13, 180, r5, 180, r15, 270],
+        [r18, 180, r9, 90, r4, 0],
+        [r12, 90, r16, 90, r14, 270, r17, 0],
+        [r18, 0, r13, 90, r14, 270, r7, 270],
+        [r12, 90, r1, 180, r17, 0, r9, 180],
+        [r5, 0, r1, 270, r14, 90, r17, 180],
+        [r5, 180, r8, 0, r11, 0, r2, 0],
+        [r5, 270, r14, 0, r17, 90, r7, 0],
+        [r2, 0, r4, 270, r13, 0, r16, 90],
+        [r9, 90, r10, 270, r14, 270, r7, 270],
+        [r16, 90, r4, 180, r15, 90, r1, 270],
+        [r2, 0, r12, 180, r16, 270, r3, 90],
+        [r13, 0, r12, 180, r7, 180, r15, 180],
+        [r14, 180, r11, 90, r5, 180, r13, 270],
+        [r6, 0, r9, 90, r11, 90, r1, 90],
+        [r5, 90, r11, 90, r17, 90, r14, 90],
+        [r6, 0, r12, 90, r3, 90, r1, 90],
+        [r18, 90, r7, 180, r4, 270, r10, 180],
+        [r5, 180, r12, 90, r8, 90, r17, 90],
+        [r18, 90, r12, 180, r11, 0],
+        [r8, 90, r15, 270, r3, 270],
+        [r9, 180, r18, 0, r14, 0, r4, 0],
+        [r13, 180, r2, 0, r15, 270, r16, 270],
+        [r6, 0, r11, 90, r17, 270, r3, 180],
+        [r2, 0, r7, 270, r6, 0, r1, 90, r14, 180],
+        [r13, 270, r12, 90, r15, 270, r3, 270, r4, 90],
+        [r9, 90, r7, 0, r11, 180, r14, 180, r10, 0],
+        [r2, 0, r11, 90, r7, 90, r15, 0, r16, 90],
+        [r12, 0, r7, 0, r1, 90, r14, 180, r11, 270],
+        [r18, 0, r2, 0, r15, 180, r4, 180, r16, 90],
+        [r13, 90, r12, 0, r14, 0, r15, 0, r2, 0],
+        [r14, 270, r6, 0, r9, 90, r7, 270, r13, 0],
+        [r13, 270, r11, 0, r1, 180, r15, 180],
+        [r12, 270, r9, 90, r7, 90, r11, 90, r15, 0],
+        [r6, 0, r1, 180, r14, 0, r9, 180, r17, 270],
+        [r12, 270, r10, 0, r7, 270, r8, 180, r3, 180],
+        [r10, 0, r14, 90, r7, 0, r15, 0, r3, 90],
+        [r12, 0, r11, 90, r5, 0, r3, 0, r17, 180],
+        [r1, 180, r13, 0, r6, 0, r15, 0, r3, 0],
+        [r12, 270, r9, 90, r11, 180, r10, 0, r13, 0],
+        [r18, 270, r15, 0, r11, 270, r14, 180, r3, 270],
+        [r13, 0, r11, 0, r15, 270, r3, 180],
+        [r1, 90, r5, 270, r6, 0, r12, 180, r11, 0],
+        [r12, 90, r13, 270, r8, 90, r15, 90],
+        [r2, 0, r11, 270, r14, 270, r16, 0, r4, 90],
+        [r15, 0, r9, 180, r10, 90, r13, 90, r14, 180],
+        [r18, 270, r1, 180, r17, 90, r4, 90, r3, 0],
+    ];
+    var last=example.length;
+    
+    function exampleChoice(choice){             // Описываем функцию заполнения поля с образцами
+        var sam=document.getElementById('sam'); 
+        sam.innerHTML='';                   //Очищаем от предыдущей картинки
+                                                  
+        var ex=example[choice];                   //Находим нужный образец по индексу в массиве Example
+        
+        for (var i=0; i<ex.length; i+=2 ){
+            var s=document.createElement('img');
+            s.src=(ex[i].src);
+            s.style.position='absolute';
+            s.style.width=square +'px';
+            s.style.height=square +'px';
+            s.style.zIndex=i;
+            s.style.borderColor='#d8bfd8';
+            s.style.borderWidth=2+'px';
+            s.style.borderRadius=5+'px';
+            s.style.borderStyle='solid';
+            var u=ex[i+1];
+            s.style.transform='rotate('+ u + 'deg)';
+            sam.appendChild(s);
+        }
+        
+    }
+
+    var record=[];               //Заводим массив, в котором будет собираться информация какие плитки и в каком положении выбрал пользователь
+    
+    exampleChoice(choice);           //Отображаем первый образец, который появляется сразу при загрузке страницы
+
     window.addEventListener("load", setPosition, false);
-    var image =document.getElementsByTagName('img');
-    //image.onmousedown=dragStart();
-    //image.addEventListener("mouseup", dragnDrop);
     function setPosition(EO) {
         EO=EO||window.event;
-        var pict;
-        pict=document.getElementsByTagName('img');
-        console.log(pict);
+        var elems=document.getElementsByClassName('plitki');          
         
-        for (var i=pict.length-1; i=0; i-- ){
-            var elem=pict[i];
-            var elemLeft=elem.offsetLeft;
-            var elemTop=elem.offsetTop; 
-            elem.style.float='none';
-            elem.style.position='absolute';
-            elem.style.left=elemLeft;
-            elem.style.top=elemTop;            
+        for (var i=elems.length-1; i>=0; i-- ){
+            var elem=elems[i];
+            elem.onclick = imgClick;            
         };
-    };
-    //function dragStart(EO) {
-    //    EO=EO||window.event;
         
-    //    var pictPos=getElementPos(EO);
-    //    var clickX=Math.round(EO.pageX-pictPos.left);
-    //    var clickY=Math.round(EO.pageY-pictPos.top);
-    //    console.log(pictPos, clickX, clickY)
+    };
+    function imgClick(EO) {          //Перемещаем выбранную пластинку
+        EO = EO || window.event;
+        EO.preventDefault();
+        var pict = EO.target;  
+        pict.style.position='absolute'; 
+  
+        var count=0;                  //Заводим счетчик Z-index -ов
     
-    //};
-    //function getElementPos(elem) {
-    //    var bbox=elem.getBoundingClientRect();
-    //    return {
-    //        left: bbox.left+window.pageXOffset,
-    //        top: bbox.top+window.pageYOffset
-    //    };
-    //}
+        var place = document.getElementById('place');   
+        pict.style.zIndex=count++;
+        pict.style.left=0+'px';
+        pict.style.top=0+'px';
+        pict.style.margin=0+'px';
+        pict.style.width=square +'px';
+        pict.style.height=square +'px';
+        place.appendChild(pict);
+
+        function imgRecord(pict){    //Проверяем есть ли данные о выбранной пластинке в массиве record, т.к. пользователь может несколько раз
+            for (var i=0;            //  нажимать на одну и ту же пластинку
+                i<record.length;   
+                i++ ){
+                var b=record[i];
+                var c=pict.id;
+                if (b==c)
+                return true
+                else false
+            }
+            return
+        }
+        
+        if (imgRecord(pict)==true){      //записываем в массив record данные о выбранных пластинках (id), если они туда не записаны ранее, а также угол поворота,
+        }    
+        else record.push(pict.id, 0);    // первоначальный угол 0градусов
+        
+        window.onmousemove = null; 
+        //console.log(record);
+        return record
+    }
+    function imgRotate(){        //функция поворачивает верхнюю пластинку, вызывается кнопкой
+        var parent=document.getElementById('place');
+        var rot=parent.lastChild;       //Находим самую верхнюю пластинку
+        var ugol=record.pop();      //Текущий угол поворота пластинки- это последний элемент в массиве record;      
+        //console.log(ugol);
+        ugol=ugol+90;       
+        rot.style.transform='rotate('+ugol+'deg)';  //поворачиваем пластинку
+        record.push(ugol);         //  записываем новую величину угла в массив
+        ugol=0;
+        //console.log(record);
+    }
+    function imgDelete(){             // функция удаляет верхнюю пластинку на ее прежнее место, вызывается кнопкой
+        var parent=document.getElementById('place');
+        var rot=parent.lastChild;       //Находим самую верхнюю пластинку
+        rot.style.position='static';
+        rot.style.width=parSquare +'px';
+        rot.style.height=parSquare +'px';
+        rot.style.transform='rotate('+ 0 + 'deg)';
+        record.pop();   //удаляем из массива record угол поворота пластинки
+        record.pop();   //удаляем из массива record имя пластинки
+        var name=rot.id;
+        var mother;
+                      //   Возвращаем пластинки на исходные места
+        switch (name) {
+            case 'r1':
+                mother= document.getElementById('d1');
+                break;
+            case 'r2':
+                mother= document.getElementById('d2');
+                break;
+            case 'r3':
+                mother= document.getElementById('d3');
+                break;
+            case 'r4':
+                mother= document.getElementById('d4');
+                break;
+            case 'r5':
+                mother= document.getElementById('d5');
+                break;
+            case 'r6':
+                mother= document.getElementById('d6');
+                break;
+            case 'r7':
+                mother= document.getElementById('d7');
+                break;    
+            case 'r8':
+                mother= document.getElementById('d8');
+                break;
+            case 'r9':
+                mother= document.getElementById('d9');
+                break;    
+            case 'r10':
+                mother= document.getElementById('d10');
+                break;  
+            case 'r11':
+                mother= document.getElementById('d11');
+                break;    
+            case 'r12':
+                mother= document.getElementById('d12');
+                break;   
+            case 'r13':
+                mother= document.getElementById('d13');
+                break;     
+            case 'r14':
+                mother= document.getElementById('d14');
+                break;  
+            case 'r15':
+                mother= document.getElementById('d15');
+                break;   
+            case 'r16':
+                mother= document.getElementById('d16');
+                break;  
+            case 'r17':
+                mother= document.getElementById('d17');
+                break;   
+            case 'r18':
+                mother= document.getElementById('d18');
+                break;           
+            }    
+        
+        mother.appendChild(rot);
+        mother=null;
+    }
+    var rezult;
+    console.log(rezult);
+    function imgVerify(){  //Проверяем решение задания: сравниваем массивы [record] и [example[choice]]
+        var recordCompare=[];   //из массива record переносим и преобразуем данные в массив recordCompare (обрезаем значения углов)
+        console.log(record);
+        for (var i=0; i<record.length; i=i+2 ){
+            recordCompare.push(record[i]);
+            var ug=record[(i+1)];                        
+                             
+                var name=record[i];                 
+                switch (name) {        //для фигур, которые не меняются от поворота (ромб, квадрат) угол равен 0
+                    case 'r2':
+                    ug=0;
+                break;
+                    case 'r6':
+                    ug=0;
+                break;
+                }
+                if (ug>=360) {       //значения углов поворота 
+                    var m=parseInt(ug/360)  //целое число от деления угла на 360
+                    ug=ug-(m*360);        //убираем полные обороты в 360 градусов                     
+                    }
+                else ug    
+            recordCompare.push(ug);
+                        
+        }
+        console.log(recordCompare);
+        var exampleCompare=[];   //из массива example[choice] переносим и преобразуем данные в массив exampleCompare (только id, а не весь элемент в массив)
+        var exLen=example[choice].length;
+        var ex=example[choice];
+        for (var u=0; u<exLen; u=u+2 ){
+            exampleCompare.push(ex[u].id);
+            exampleCompare.push(ex[u+1]); 
+        }     
+        console.log(exampleCompare);
+
+        var recLen=recordCompare.length;
+        console.log(recLen, exLen);
+        if(recLen==exLen){
+            rezult=true;
+            arrayCompare(recordCompare, exampleCompare);
+        }
+        else rezult=false;
+        console.log(rezult);
+
+        function arrayCompare(){
+            for (var n=0; n<exLen; n++ ){
+            var redCom=recordCompare[n];
+            var exi=exampleCompare[n];
+            console.log(redCom, exi);
+                if(redCom==exi){
+                    rezult=true;
+                    console.log(redCom, exi, rezult);
+                    continue
+                }
+                else rezult=false;  break;  console.log(rezult);               
+            }
+            return rezult
+        }
+        console.log(rezult);
+        showRezult(rezult);
+        return rezult
+    }
+    
+    
+    function imgNext(){
+        if (choice>=example.length-1){
+        choice=0;
+        }
+        else{
+        choice=choice+1;
+        };
+        exampleChoice(choice);
+        var c=0;
+        if (record.length>0){
+        for (c=record.length; c>=0;  c=c-2){
+            imgDelete();                   
+        }  
+        }      
+    }
+    function imgPre(){
+        if (choice<=0){
+        choice=example.length-1;
+        }
+        else{
+        choice=choice-1;
+        }
+        exampleChoice(choice);
+        var c=0;
+        if (record.length>0){
+        for (c=record.length; c>=0;  c=c-2){
+            imgDelete();                   
+        }  
+        }        
+    }
+    function imgHelp(){        
+        var child=sam.children;
+        console.log(child);
+        for (var i=0; i<child.length; i++){
+            var x=-120+(90*i);
+            var y=110-(25*i);
+            var ex=example[choice];
+            var u=ex[i*2+1];
+            child[i].style.transform='translateZ(0)translateX('+x+'px)translateY('+y+'px)rotate('+ u + 'deg) ';
+            child[i].style.width=helpSquare +'px';        //раскладываем картинку
+            child[i].style.height=helpSquare +'px';
+            child[i].style.opacity=0.9;
+            child[0].style.opacity=1;
+            child[i].style.transitionDuration=3+'s';
+        }                       
+        setTimeout(complete, 7000);
+        function complete(){
+            for (var i=0; i<child.length; i++){
+            var x=0;
+            var y=0;
+            var ex=example[choice];
+            var u=ex[i*2+1];
+            child[i].style.transform='translateZ(0)translateX('+x+'px)translateY('+y+'px)rotate('+ u + 'deg) ';
+            child[i].style.width=square +'px';        //складываем картинку
+            child[i].style.height=square +'px';
+            child[i].style.opacity=1;
+            child[i].style.transitionDuration=3+'s';
+        }           
+        }
+    }
+    function showRezult(){
+        console.log(rezult);
+        if (rezult==true){
+           confe();
+           winner();
+        }
+        else loser();
+    }
+    function confe(){
+        var count = 200;
+        var defaults = {
+        origin: { y: 0.7 }
+        };
+
+    function fire(particleRatio, opts) {
+    confetti(Object.assign({}, defaults, opts, {
+    particleCount: Math.floor(count * particleRatio)
+    }));
+    }
+
+    fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+    });
+    fire(0.2, {
+    spread: 60,
+    });
+    fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8
+    });
+    fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2
+    });
+    fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+    });
+    };
+    function winner(){
+        var scrn=document.getElementById('scr');
+        var win=document.createElement('div');
+        
+        win.style.position='absolute';
+        win.style.width=500 +'px';
+        win.style.height=80 +'px';
+        win.style.zIndex=1000;
+        win.style.borderColor='red';
+        win.style.borderWidth=2+'px';
+        win.style.borderRadius=10+'%';
+        win.style.borderStyle='solid';
+        win.style.backgroundColor='yellow';
+        win.style.opacity=0.8;
+        win.style.display='inline-block';
+        win.style.left=document.body.offsetWidth/2-250+'px';
+        win.style.top=document.body.offsetHeight/2-40+'px';
+        win.innerHTML='ПРАВИЛЬНО';
+        win.style.fontSize=2.5+'em';
+        win.style.color='blue';
+        win.style.textAlign='center';
+        win.style.paddingTop=1+'em';
+        console.log(win, scrn);
+        scrn.appendChild(win); 
+        setTimeout(clearW, 4000);
+        function clearW(){
+            scrn.removeChild(win); 
+        }  
+    }
+    function loser(){
+        var scrn=document.getElementById('scr');
+        var los=document.createElement('div');        
+        los.style.position='absolute';
+        los.style.width=500 +'px';
+        los.style.height=100 +'px';
+        los.style.zIndex=1000;
+        los.style.borderColor='#0ad4f8';
+        los.style.borderWidth=2+'px';
+        los.style.borderRadius=10+'%';
+        los.style.borderStyle='solid';
+        los.style.opacity=0.8;
+        los.style.backgroundColor='#16395a';
+        los.style.display='inline-block';
+        los.style.left=document.body.offsetWidth/2-250+'px';
+        los.style.top=document.body.offsetHeight/2-50+'px';
+        los.innerHTML='ПОПРОБУЙ ЕЩЕ РАЗ';
+        los.style.fontSize=2+'em';
+        los.style.color='red';
+        los.style.textAlign='center';
+        los.style.paddingTop=1.5+'em';
+        console.log(los, scrn);
+        scrn.appendChild(los);  
+        setTimeout(clearL, 4000);
+        function clearL(){
+            scrn.removeChild(los); 
+        }        
+    }
+    
     </script>
+       
     </body>
+    
 </html>
