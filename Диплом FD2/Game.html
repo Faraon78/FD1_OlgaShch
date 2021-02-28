@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>example</title>
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
     <style>
+        *{
+            font-family: 'Neucha', cursive;
+            font-size:20px;
+            font-weight: 800;
+        }
         body{
             height: 100%;
+            background-image: url('Images/gradient.png');
+            background-size: cover;
         }
         .screen {
             display:grid;            
             grid-template-columns: 1fr, 4fr;
             width: 100%;
-            background-image: url('Images/gradient.png');
+            
         }
         .sample {
             grid-column: 1;
@@ -57,7 +66,6 @@
             text-align: center;
             position: relative;
             border-radius: 5px;
-            /*background-color: rgb(250, 227, 246);*/
             transform: translateZ(0);
           
         }
@@ -67,7 +75,6 @@
             width: 300px;
             border: 2px  dashed thistle solid;
             position: relative;
-            /*background-color:rgb(250, 227, 246);*/
             transform: translateZ(0);
             transition-duration: 3s;
             border-radius: 3px;
@@ -98,16 +105,18 @@
         input{
             width: 200px;
             height: 50px;
-            font-size: large;
+            
             border-radius: 3px;
             background-color: rgb(209, 224, 243);
             border-color:  #0ad4f8;
             box-shadow: mediumturquoise 0 0 5px inset;
+            color: #3b1196;
         }
                         
     </style>
 </head>
 <body>
+<div id='myPage'>    
     
 <div class='screen' id='scr'>   
     
@@ -118,7 +127,8 @@
         <div><input type="button" value="Подсказка" onclick="imgHelp()"> </div>
         <div><input type="button" value="Предыдущее задание" onclick="imgPre()"> </div>
         <div><input type="button" value="Следующее задание" onclick="imgNext()"></div>
-        <div><input type="button" value="Каталог заданий" onclick="imgChoice()"></div>
+        <div><input type="button" value="Каталог заданий" onclick="imgCatalog()"></div>
+        <div><input type="button" value="На главную" onclick="mainPage()"></div>
     </div>
     <div class="main">
         
@@ -150,18 +160,29 @@
         <div id='d18'><img id='r18' class='plitki' src="Images/rt18.png"></div>
     </div>         
 </div> 
+</div>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
 <script>
     "use strict";
     var square=300;              //Устанавливаем размер "приемника" для плиток
     var parSquare=130;           // Устанавливаем исходный размер для плиток
     var helpSquare=square*0.5;  //уменьшение пластинок при разложении на подсказке
-    var choice=0;            //Переменная, в которой будет лежать номер образца задания при загрузке, по умолчанию самое первое из массива     
+    var choice;            //Переменная, в которой будет лежать номер образца задания при загрузке, берется из LocalStorage или 0 (первое из массива заданий) 
 
-    var place = document.getElementById('place');
-    place.style.width=square + 0 +'px';
-    place.style.height=square + 0 +'px';
+    window.onhashchange=switchToStateFromURLHash;     // в закладке УРЛа будем хранить полное JSON-представление состояния приложения
 
+    // текущее состояние приложения
+    var SPAState={};    // могут быть элементы pagename и numberChoice (номер образца)
+                        // вызывается при изменении закладки УРЛа  а также при первом открытии страницы
+                        // читает новое состояние приложения из закладки УРЛа  и обновляет ВСЮ вариабельную часть веб-страницы
+    var storage=localStorage.colorCode;
+    if (!storage){
+        choice=0;
+    }
+    else {
+        choice=parseInt(storage); 
+    };
+    //console.log(choice);
     var example=[                       //создаем массив с образцами заданий разной сложности, всего 85 заданий
         [r2, 0, r6, 0],  // все значения парами: id плитки и угол поворота по часовой стрелке
         [r9, 0, r5, 0],
@@ -177,7 +198,6 @@
         [r2, 0, r15, 270],
         [r9, 180, r13, 90],
         [r5, 0, r6, 0, r8, 0],
-        [r4, 0, r17, 0, r16, 0],
         [r9, 0, r6, 0, r10, 90],
         [r7, 180, r13, 0, r2, 0],
         [r4, 0, r1, 180, r16, 270],
@@ -270,14 +290,107 @@
             var u=ex[i+1];
             s.style.transform='rotate('+ u + 'deg)';
             sam.appendChild(s);
+            localStorage.colorCode=choice;   //сохраняем номер задания в localStorage
         }
-        
+     
     }
+    exampleChoice(choice);       
+    var myPage=document.getElementById('myPage');
+    var scrn=document.getElementById('scr');
+
+    function mainPage(){                                           //функция вызывает главную страницу
+        var main=document.createElement('div');
+        main.id='mainPa';
+        main.style.textAlign='center';        
+        myPage.innerHTML='';
+
+        myPage.appendChild(main);
+        var header=document.createElement('div');                    //создаем заголовок
+        header.style.display='inline-block';
+        header.style.alignItems='center';
+        header.style.marginTop=150+'px';
+
+        mainPa.appendChild(header);
+        var words=['Ц', 'В', 'E', 'Т', 'О', 'В', 'О', 'Й', 'п', 'К', 'О', 'Д']; 
+        for (var l=0; l<words.length; l++){
+            var letter=document.createElement('div');
+            letter.innerText=words[l];
+            letter.style.display='inline-block';
+            letter.style.borderColor='#d8bfd8';
+            letter.style.borderStyle='solid';
+            letter.style.borderRadius=5+'px';
+            letter.style.margin=2+'px';
+            letter.style.paddingTop=8+'px';
+            letter.style.paddingBottom=8+'px';
+            letter.style.paddingLeft=20+'px';
+            letter.style.paddingRight=20+'px';
+            letter.style.fontSize=4+'em';
+            letter.style.fontWeight='bold';
+            header.appendChild(letter);
+        }
+        var letters=header.children;
+        letters[0].style.color='#1489f7'; 
+        letters[0].style.transform='rotate('+340+'deg)';
+        letters[1].style.color='#85095b'; 
+        letters[1].style.transform='rotate('+15+'deg)';
+        letters[2].style.color='#90f252'; 
+        letters[2].style.transform='rotate('+25+'deg)';
+        letters[3].style.color='#fcdb35';
+        letters[3].style.transform='rotate('+350+'deg)'; 
+        letters[4].style.color='#188c3f'; 
+        letters[4].style.transform='rotate('+335+'deg)';
+        letters[5].style.color='#f22734'; 
+        letters[5].style.transform='rotate('+355+'deg)';
+        letters[6].style.color='#3b1196'; 
+        letters[6].style.transform='rotate('+10+'deg)';
+        letters[7].style.color='#e4f52f';
+        letters[7].style.transform='rotate('+350+'deg)';
+        letters[8].style.visibility='hidden';
+        letters[9].style.color='#450696'; 
+        letters[9].style.transform='rotate('+355+'deg)';
+        letters[10].style.color='#450696'; 
+        letters[10].style.transform='rotate('+10+'deg)';
+        letters[11].style.color='#450696';
+        letters[11].style.transform='rotate('+350+'deg)';
+
+        header.style.left=main.offsetWidth/2-header.offsetWidth/2;
+
+        var buttons=document.createElement('div');
+        buttons.style.marginTop=100+'px';
+        buttons.style.textAlign='center';
+        mainPa.appendChild(buttons);
+
+        var but1=document.createElement('input');
+        but1.type='button';
+        but1.value='Каталог заданий';
+        but1.style.marginBottom=15+'px';
+        but1.onclick=imgCatalog;
+        buttons.appendChild(but1);
+        var br1=document.createElement('br');
+        buttons.appendChild(br1);
+
+        var but2=document.createElement('input');
+        but2.type='button';
+        but2.value='Играть';
+        but2.style.marginBottom=15+'px';
+        but2.onclick=runGame;
+        //but2.onclick=switchToState( { pagename:'Game', numberChoice:choice } );
+        buttons.appendChild(but2);
+        var br2=document.createElement('br');
+        buttons.appendChild(br2);
+
+        var but3=document.createElement('input');
+        but3.type='button';
+        but3.value='Правила игры';
+        buttons.appendChild(but3);
+        switchToState( { pagename:'Main' } )
+    }
+    var place = document.getElementById('place');
+    place.style.width=square + 0 +'px';
+    place.style.height=square + 0 +'px';        
 
     var record=[];               //Заводим массив, в котором будет собираться информация какие плитки и в каком положении выбрал пользователь
     
-    exampleChoice(choice);           //Отображаем первый образец, который появляется сразу при загрузке страницы
-
     window.addEventListener("load", setPosition, false);
     function setPosition(EO) {
         EO=EO||window.event;
@@ -340,6 +453,7 @@
         ugol=0;
         var audio2 = new Audio('Sound/Rotate.mp3');
         audio2.play(); 
+        
         
     }
     function imgDelete(){             // функция удаляет верхнюю пластинку на ее прежнее место, вызывается кнопкой
@@ -416,9 +530,9 @@
         var audio1 = new Audio('Sound/Delete.mp3');
         audio1.play(); 
         mother=null;
+        
     }
     var rezult;
-    console.log(rezult);
     function imgVerify(){  //Проверяем решение задания: сравниваем массивы [record] и [example[choice]]
         var recordCompare=[];   //из массива record переносим и преобразуем данные в массив recordCompare (обрезаем значения углов)
         console.log(record);
@@ -492,10 +606,12 @@
         exampleChoice(choice);
         var c=0;
         if (record.length>0){
-        for (c=record.length; c>=0;  c=c-2){
-            imgDelete();                   
+            for (c=0; c<record.length;  c=c+2){
+                imgDelete();                   
+            }          
         }  
-        }      
+        
+        switchToState( { pagename:'Game', numberChoice:choice } );    
     }
     function imgPre(){
         if (choice<=0){
@@ -510,7 +626,8 @@
         for (c=record.length; c>=0;  c=c-2){
             imgDelete();                   
         }  
-        }        
+        }   
+        switchToState( { pagename:'Game', numberChoice:choice } );     
     }
     function imgHelp(){        
         var child=sam.children;
@@ -640,7 +757,6 @@
         los.style.color='red';
         los.style.textAlign='center';
         los.style.paddingTop=1.5+'em';
-        console.log(los, scrn);
         scrn.appendChild(los);
         var audio5 = new Audio('Sound/Lose.mp3');
             audio5.play();   
@@ -649,7 +765,124 @@
         function clearL(){
             scrn.removeChild(los); 
         }        
+    }   
+
+    
+    var mn=document.getElementById('mainPa');
+
+    function imgCatalog(){                                           //функция вызывает каталог заданий
+        var catalog=document.createElement('div');
+        catalog.id='catalog';
+        myPage=document.getElementById('myPage');
+        
+        myPage.innerHTML='';
+
+        myPage.appendChild(catalog);
+        var catName=document.createElement('h1');                    //создаем заголовок
+        catName.innerText='КАТАЛОГ ЗАДАНИЙ';
+        catName.style.textAlign='center';
+        catalog.appendChild(catName);
+        for(var p=0; p<example.length; p++){                       //  циклом создаем контейнеры для образцов
+            var pattern=document.createElement('div');
+            pattern.style.display='inline-block';
+            pattern.style.width=square/2 +'px';
+            pattern.style.height=square/2 +'px';
+            pattern.style.margin=20+'px';
+            pattern.className=p;
+            pattern.onclick=patChoice;
+                        
+            var pat=example[p];                   //Находим нужный образец по индексу в массиве Example
+        
+                for (var i=0; i<pat.length; i+=2 ){               //циклом заполняем образцы
+                var pn=document.createElement('img');
+                pn.src=(pat[i].src);
+                pn.style.position='absolute';
+                pn.style.width=square/2 +'px';
+                pn.style.height=square/2 +'px';
+                pn.className=p;
+                pn.style.zIndex=i;
+                pn.style.borderColor='#d8bfd8';
+                pn.style.borderWidth=2+'px';
+                pn.style.borderRadius=5+'px';
+                pn.style.borderStyle='solid';
+                
+                var u=pat[i+1];
+                pn.style.transform='rotate('+ u + 'deg)';
+                pattern.appendChild(pn);
+            }
+            catalog.appendChild(pattern);       //подвешиваем к дереву DOM
+        }
+        switchToState( { pagename:'Catalog' } );
+    };
+    function patChoice(EO) {          //Переходим на страницу Game с выбранным образцом
+        EO = EO || window.event;
+        var yourImg = EO.target;
+        choice=parseInt(yourImg.className); 
+        console.log(choice);
+        runGame(choice);
+    }    
+
+    function runGame(){       //Запускает страницу Game
+        console.log(choice);
+        myPage.innerHTML='';
+        myPage.appendChild(scrn); 
+        switchToState( { pagename:'Game', numberChoice:choice } );
+        exampleChoice(choice);
+        
+        var c=0;
+        if (record.length>0){
+        for (c=record.length; c>=0;  c=c-2){
+            imgDelete();                   
+        }  
+        }  
+            
     }
+    
+
+    function switchToStateFromURLHash() {
+        var URLHash=window.location.hash;    
+
+        var stateJSON=decodeURIComponent(URLHash.substr(1));     // убираем из закладки УРЛа решётку  и декодируем из формата УРЛ
+        console.log(stateJSON);
+        if ( stateJSON!="" )
+            SPAState=JSON.parse(stateJSON);     // если JSON непустой, читаем из него состояние и отображаем
+        else
+            SPAState={pagename:'Main'};         // иначе показываем главную страницу
+            
+        switch ( SPAState.pagename) {      // обновляем вариабельную часть страницы под текущее состояние (цепляем к DOM нужную ветку)
+            case 'Main':
+                mainPage();  
+                
+            break;
+            case 'Game':
+                console.log(SPAState.numberChoice);
+                if(!SPAState.numberChoice){
+                    choice=choice;
+                    
+                }
+                else {choice=SPAState.numberChoice};
+                runGame(choice);
+                
+            break;
+            case 'Catalog':
+                imgCatalog();
+                
+            break;
+        }
+    }
+
+    function switchToState(newState) {          // устанавливает в закладке УРЛа новое состояние приложения  и затем устанавливает+отображает это состояние
+                                                // устанавливаем закладку УРЛа (кодируя как положено любые компоненты УРЛ)
+        location.hash=encodeURIComponent(JSON.stringify(newState));
+        //console.log(location.hash,newState)
+    }                                                               // АВТОМАТИЧЕСКИ вызовется switchToStateFromURLHash()
+                                            // т.к. закладка УРЛа изменилась (ЕСЛИ она действительно изменилась)
+
+    switchToStateFromURLHash();   // переключаемся в состояние, которое сейчас прописано в закладке УРЛ
+
+    
+
+    
     
     </script>
        

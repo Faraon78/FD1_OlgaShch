@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis</title>
+    <style>
+        #field{
+            background-color: yellow;
+            border: solid black 1px;
+            position: absolute;          
+        };
+        #screen{
+            display: inline-block;
+           
+        }
+
+        #game{
+            position: absolute;  
+            display: inline-block;
+            
+        }
+        #racL{
+            background-color: green;
+            position: absolute;
+        }
+        #racR{
+            background-color: blue;
+            position: absolute;
+        }
+        #ball{
+            position: absolute;
+            background-color: red;
+            border-radius: 50%;
+        }
+        #count{
+            font-size: 2em;
+            margin-bottom: 10px;
+            position: absolute;
+        }
+        input{
+            margin-bottom: 10px;
+            width: 100px;
+            font-weight: bold;
+        }
+
+    </style>
+    
+</head>
+<body>    
+    <div id="screen">
+        <div id='game'>
+            <input type="button" value="Старт" onclick="start()">
+            <div id=count></div>
+            <div id='field'>
+                <div id='racL'></div>
+                <div id='ball'></div>
+                <div id='racR'></div>
+            </div>
+        </div>
+    </div>
+    
+
+<script>
+    "use strict";
+    var fieldWidth = 600;    //Ширина игрового поля
+    var fieldHeight = 400;   //Высота игрового поля  
+    var headHeight = 50;    //Высота шапки над полем
+    var pad = 100;           //Отступ от верха экрана  
+    var racW = 13;           //Ширина ракетки
+    var racH = fieldHeight/4;  // высота ракетки
+    var ballS = 30;       // Диаметр мяча    
+
+    var game = document.getElementById('game');                      //позиционируем игровую область
+    game.style.left=document.body.offsetWidth/2-fieldWidth/2 + 'px';
+    game.style.top=pad + 'px';
+    game.style.width=fieldWidth + 'px';
+
+    var field = document.getElementById('field');      //позиционируем игровое поле
+    field.style.width=fieldWidth + 'px';
+    field.style.height=fieldHeight + 'px';
+
+    var racL=document.getElementById('racL');         //позиционируем левую ракетку
+    racL.style.width=racW + 'px';
+    racL.style.height=racH + 'px';
+    racL.style.top=fieldHeight/2-racH/2+ 'px';
+    var speedL=0;
+    racL.onkeydown(16)=racMoveUp;                     //Подписываемся на нажатия клавиш  Shift и Ctrl
+    racL.onkeydown(17)=racMoveDown;
+
+    var racR=document.getElementById('racR');        //позиционируем правую ракетку
+    racR.style.width=racW + 'px';
+    racR.style.height=racH + 'px';
+    racR.style.top=fieldHeight/2-racH/2+ 'px';
+    racR.style.left=fieldWidth-racW+2 + 'px';
+    var speedR=0;
+    racR.onkeydown(38)=racMoveUp;                     //Подписываемся на нажатия клавиш  стрелка вверх и стрелка вниз
+    racR.onkeydown(40)=racMoveDown;
+
+    var ball=document.getElementById('ball');       //позиционируем мяч
+    ball.style.width=ballS + 'px';
+    ball.style.height=ballS + 'px';
+    ball.style.left =fieldWidth/2-ballS/2 + 'px';
+    ball.style.top =fieldHeight/2-ballS/2 + 'px';
+
+    var tablo=document.getElementById('count');       //позиционируем табло
+    tablo.style.left =fieldWidth/2+ 'px';
+    tablo.style.top =0+ 'px';
+    var countL=0;                                //заводим счетчики голов для левой и правой ракеток
+    var countR=0;
+    tablo.innerHTML=countL + ':' + countR;
+
+    var timer=requestAnimationFrame();    //Создаем таймер
+
+    function racMoveUp(){
+        
+    }
+
+    function start(){
+        
+    }
+
+    
+    window.addEventListener("load", setPosition, false);
+    var image =document.getElementsByTagName('img');
+    function setPosition(EO) {
+        EO=EO||window.event;
+        var elems=document.getElementsByTagName('img');
+        
+        
+        for (var i=elems.length-1; i>=0; i-- ){
+            var elem=elems[i];
+            elem.style.position='absolute';
+            elem.style.left=elem.offsetLeft+'px';
+            elem.style.top=elem.offsetTop+'px'; 
+            elem.onmousedown = imgMouseDown;
+            elem.onmouseup = imgMouseUp;
+        };
+        
+    };
+        function imgMouseDown(EO) {
+        EO = EO || window.event;
+        EO.preventDefault();
+        
+ 
+        var moveX = EO.pageX - EO.target.offsetLeft;
+        var moveY = EO.pageY - EO.target.offsetTop; 
+        var cont = document.getElementById('cont');
+        var pict = EO.target;
+        cont.appendChild(pict);
+ 
+ 
+    window.onmousemove = imgMouseMove; 
+    function imgMouseMove(EO) {
+      EO = EO || window.event;
+      EO.preventDefault();      
+ 
+      pict.style.top = (EO.pageY - moveY) + 'px';
+      pict.style.left = (EO.pageX - moveX) + 'px';
+ 
+    }
+  }
+ 
+  function imgMouseUp(EO) {
+    EO.preventDefault();
+     
+    window.onmousemove = null; 
+ 
+  }
+ 
+ 
+
+    </script>
+    </body>
+</html>
