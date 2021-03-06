@@ -1,0 +1,432 @@
+*{
+    font-family: 'Neucha', cursive;
+    font-size:20px;
+    font-weight: 800;
+}
+
+body{
+    height: 100%;
+    background-image: url('Images/gradient.png');
+    background-size: auto 2000px;
+}
+.screen {
+    display:grid;            
+    grid-template-columns: 500px, 4fr;
+    width: 100%;
+    
+}
+.sample {
+    grid-column: 1;
+    grid-row: 1;
+    height: 350px;
+    border: solid  rgb(10, 212, 248);
+    margin-bottom: 5px;
+    margin-right: 5px;
+    align-items: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    /*min-width: 500px;*/
+}
+
+.menu {
+    grid-column: 1;
+    grid-row: 2;
+    border: solid rgb(10, 212, 248);
+    margin-right: 5px;
+    height: 500px;
+   
+    text-align: center;
+}
+.menu div{
+    align-items: center;
+    margin: 10px;
+}
+.menu div:first-child{
+    margin-top: 40px;
+}
+.main {
+    
+    grid-column: 2;
+    grid-row: 1;
+    border: solid rgb(10, 212, 248);
+    margin-bottom: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#place {
+    display: inline-block;
+    border:#d8bfd8 solid;
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+    transform: translateZ(0);
+    width: 300px;
+    height: 300px;
+    transform: translateZ(0);
+  
+}
+#sam{
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+    border: 2px  dashed thistle solid;
+    position: relative;
+    transform: translateZ(0);
+    transition-duration: 3s;
+    border-radius: 3px;
+    transform: translateZ(0);
+}
+.button{
+    margin-left: 30px;
+
+}
+.button>div>input{
+    margin-bottom: 10px;
+}
+.plate {
+    grid-column: 2;
+    grid-row: 2;
+    border: solid  #0ad4f8;
+    display: grid;
+    justify-content:space-around;
+                    
+}
+.plate div{
+    width: 130px;
+    height: 130px;
+}
+.plitki{
+    width: inherit;
+    height: inherit;
+    border:#d8bfd8 solid;
+    margin: 2px;
+    background-size: 100%;
+    transition-duration: 1s;
+    border-radius: 5px;
+}
+#d1, #d2, #d3, #d4, #d5,#d6{
+    grid-row: 1;
+}
+input{
+    width: 200px;
+    height: 50px;
+    border-radius: 3px;
+    background-color: rgb(209, 224, 243);
+    border-color:  #0ad4f8;
+    box-shadow: mediumturquoise 0 0 5px inset;
+    color: #3b1196;
+}
+.letter{
+    display: inline-block;
+    border-color: #d8bfd8;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 2px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 4em;
+    font-weight: bold;
+
+}
+.winner{
+    position: absolute;
+    width: 500px;
+    height: 90px;
+    z-index: 1000;
+    border-color: red;
+    border-width: 2px;
+    border-radius: 10%;
+    border-style: solid;
+    background-color: yellow;
+    opacity: 0.8;
+    display: inline-block;
+    font-size: 2.5em;
+    color: blue;
+    text-align: center;
+    padding-top: 0.5em;
+}
+.example{
+    position: absolute;
+    border-color: #d8bfd8;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    width: inherit;
+    height: inherit;
+}
+.header{
+    display: inline-block;
+    align-items: center;
+    margin-top: 150px;
+
+}
+.buttons{
+    margin-top: 100px;
+    text-align: center;
+}
+.loser{
+    position: absolute;
+    width: 500px;
+    height: 90px;
+    z-index: 1000;
+    border-color: #0ad4f8;
+    border-width: 2px;
+    border-radius: 10%;
+    border-style: solid;
+    opacity: 0.8;
+    background-color: #16395a;
+    display: inline-block;
+    font-size: 2em;
+    color: red;
+    text-align: center;
+    padding-top: 1em;
+
+}
+.catName{
+    text-align: center;
+    font-size: 150%;
+}
+.pattern{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+}
+#myRules{
+    text-align: center;
+    align-items: center;
+}
+.rulesPage{
+    width: 800px;
+    margin-top: 100px;
+    text-align: center;
+    position: relative;
+    background-color: rgb(229, 240, 180);
+    border-color: lime;
+    border-style: solid;
+    border-radius: 10px;
+    color: rgb(105, 13, 101);
+    display: inline-block;
+    align-items: center;
+    font-style: italic;
+    
+}
+.rulesPage p{
+    font-size: 1.2em;
+}
+.rulesPage h1{
+    font-size: 1.5em;
+}
+.rulesPage input{
+    margin-bottom: 30px;
+}
+.code{
+    color: forestgreen;
+    margin-top: 30px;
+}
+@media screen and (max-width: 1600px){
+    #sam, #place{
+        height: 200px;
+        width: 200px;
+    }
+    .plate div{
+        width:90px;
+        height: 90px;
+    }
+    .plitki{
+        width: 90px;
+        height: 90px;
+}
+}
+@media screen and (max-width: 1200px){
+    #sam, #place{
+        height: 150px;
+        width: 150px;
+    }
+    #d1, #d2, #d3, #d4, #d5{
+        grid-row: 1;
+    }
+    #d6, #d7, #d8, #d9, #d10{
+        grid-row: 2;
+    }
+    .sample{
+        height: 300px;
+    }
+    .menu input, .button input{
+        width: 170px;
+        height: 40px;
+        font-size: 0.8em;
+    }
+}
+@media screen and (max-width: 1130px){
+    .letter{
+        font-size: 2em;
+        margin: 2px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+@media screen and (max-width: 1000px){
+    .rulesPage{
+        width: 500px;
+        margin-top: 50px;
+    }
+    .rulesPage p{
+        font-size: 1em;
+    }
+    .rulesPage h1{
+        font-size: 1.2em;
+    }
+}
+@media screen and (max-width: 950px){
+    #sam, #place{
+        height: 130px;
+        width: 130px;
+    }
+    #d1, #d2, #d3, #d4{
+        grid-row: 1;
+    }
+    #d5, #d6, #d7, #d8{
+        grid-row: 2;
+    }
+    #d9, #d10, #d11, #d12{
+        grid-row: 3;
+    }
+    #d13, #d14, #d15, #d16{
+        grid-row: 4;
+    }
+    #d17, #d18{
+        grid-row: 5;
+    }
+    .sample{
+        height: 250px;
+    }
+}
+@media screen and (max-width: 900px){
+    .pattern{        
+        width: 100px;
+        height: 100px;
+        margin: 10px;    
+    }
+}
+@media screen and (max-width: 700px){
+    #sam, #place{
+        height: 120px;
+        width: 120px;
+    }
+    .sample{
+        height: 260px;
+    }
+    .menu input, .button input{
+        width: 150px;
+        height: 30px;
+    }
+    .plate div{
+        width:70px;
+        height: 70px;
+    }
+    .plitki{
+        width: 70px;
+        height: 70px;
+    }
+    .winner, .loser{
+        width: 300px;
+        height: 60px;
+        font-size: 1.5em;
+    }
+}
+@media screen and (max-width: 645px){
+    #trans{
+        display: block;
+    }
+    .header{
+        margin-top: 50px;
+    
+    }
+    .buttons{
+        margin-top: 40px;
+    }
+}
+@media screen and (max-width: 600px){
+    
+    .plate div{
+        width:50px;
+        height: 50px;
+    }
+    .plitki{
+        width: 50px;
+        height: 50px;
+}
+.menu input, .button input{
+    width: 95px;
+    height: 30px;
+    font-size: 0.5em;
+}
+.button{
+    margin-left: 10px;
+}
+.rulesPage{
+    width: 320px;
+    margin-top: 20px;
+}
+.rulesPage p{
+    font-size: 0.8em;
+}
+.rulesPage h1{
+    font-size: 1em;
+}
+}
+@media screen and (max-width: 500px){
+    .pattern{        
+        width: 50px;
+        height: 50px;
+        margin: 7px;    
+    }
+    .catName{
+        font-size: 100%;
+    }
+    .sample{
+        height: 230px;
+    }
+    .main{
+        flex-direction: column;
+    }
+    #place, #sam{
+        height: 90px;
+        width: 90px;
+    }
+    #d1, #d2, #d3{
+        grid-row: 1;
+    }
+    #d4, #d5, #d6{
+        grid-row: 2;
+    }
+    #d7, #d8, #d9{
+        grid-row: 3;
+    }
+    #d10, #d11, #d12{
+        grid-row: 4;
+    }
+    #d13, #d14, #d15{
+        grid-row: 5;
+    }
+    #d16, #d17, #d18{
+        grid-row: 6;
+    }
+}
+@media screen and (max-width: 420px){
+    .letter{
+        font-size: 1.2em;
+        margin: 1px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }    
+}

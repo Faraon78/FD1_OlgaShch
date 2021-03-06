@@ -4,116 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
+    <link rel="stylesheet" href="Style.css" type="text/css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
-    <style>
-        *{
-            font-family: 'Neucha', cursive;
-            font-size:20px;
-            font-weight: 800;
-        }
-        body{
-            height: 100%;
-            background-image: url('Images/gradient.png');
-            background-size: cover;
-        }
-        .screen {
-            display:grid;            
-            grid-template-columns: 1fr, 4fr;
-            width: 100%;
-            
-        }
-        .sample {
-            grid-column: 1;
-            grid-row: 1;
-            height: 350px;
-            border: solid  rgb(10, 212, 248);
-            margin-bottom: 5px;
-            margin-right: 5px;
-            align-items: center;
-            vertical-align: middle;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .menu {
-            grid-column: 1;
-            grid-row: 2;
-            border: solid rgb(10, 212, 248);
-            margin-right: 5px;
-            height: 500px;
-           
-            text-align: center;
-        }
-        .menu div{
-            align-items: center;
-            margin: 10px;
-        }
-        .main {
-            
-            grid-column: 2;
-            grid-row: 1;
-            border: solid rgb(10, 212, 248);
-            margin-bottom: 5px;
-            align-items: center;
-            vertical-align: middle;
-            display: flex;
-            justify-content: center;
-        }
-        #place {
-            display: inline-block;
-            border:#d8bfd8 solid;
-            text-align: center;
-            position: relative;
-            border-radius: 5px;
-            transform: translateZ(0);
-          
-        }
-        #sam{
-            display: inline-block;
-            height: 300px;
-            width: 300px;
-            border: 2px  dashed thistle solid;
-            position: relative;
-            transform: translateZ(0);
-            transition-duration: 3s;
-            border-radius: 3px;
-        }
-        .plate {
-            grid-column: 2;
-            grid-row: 2;
-            border: solid  #0ad4f8;
-            display: grid;
-                        
-        }
-        .plate div{
-            width: 150px;
-            height: 150px;
-        }
-        .plitki{
-            width: 130px;
-            height: 130px;
-            border:#d8bfd8 solid;
-            margin: 2px;
-            background-size: 100%;
-            transition-duration: 1s;
-            border-radius: 5px;
-        }
-        #d1, #d2, #d3, #d4, #d5,#d6{
-            grid-row: 1;
-        }
-        input{
-            width: 200px;
-            height: 50px;
-            
-            border-radius: 3px;
-            background-color: rgb(209, 224, 243);
-            border-color:  #0ad4f8;
-            box-shadow: mediumturquoise 0 0 5px inset;
-            color: #3b1196;
-        }
-                        
-    </style>
+    
 </head>
 <body>
 <div id='myPage'>    
@@ -129,14 +23,15 @@
         <div><input type="button" value="Следующее задание" onclick="imgNext()"></div>
         <div><input type="button" value="Каталог заданий" onclick="imgCatalog()"></div>
         <div><input type="button" value="На главную" onclick="mainPage()"></div>
+        <div class='code'>Код взломали уже <span id='lock'>  </span> раз!</div>
     </div>
     <div class="main">
         
         <div id='place'></div>
         <div class='button'>
-            <input type="button" value="Повернуть пластинку" onclick="imgRotate()"> 
-            <input type="button" value="Убрать пластинку" onclick="imgDelete()">
-            <input type="button" value="Проверить" onclick="imgVerify()">
+            <div><input type="button" value="Повернуть пластинку" onclick="imgRotate()"> </div>
+            <div><input type="button" value="Убрать пластинку" onclick="imgDelete()"></div>
+            <div><input type="button" value="Проверить" onclick="imgVerify()"></div>
         </div>
     </div>
     <div class="plate">
@@ -162,13 +57,11 @@
 </div> 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
+<script src="http://fe.it-academy.by/JQ/jquery.js"></script>
 <script>
     "use strict";
-    var square=300;              //Устанавливаем размер "приемника" для плиток
-    var parSquare=130;           // Устанавливаем исходный размер для плиток
-    var helpSquare=square*0.5;  //уменьшение пластинок при разложении на подсказке
     var choice;            //Переменная, в которой будет лежать номер образца задания при загрузке, берется из LocalStorage или 0 (первое из массива заданий) 
-
+        
     window.onhashchange=switchToStateFromURLHash;     // в закладке УРЛа будем хранить полное JSON-представление состояния приложения
 
     // текущее состояние приложения
@@ -176,14 +69,14 @@
                         // вызывается при изменении закладки УРЛа  а также при первом открытии страницы
                         // читает новое состояние приложения из закладки УРЛа  и обновляет ВСЮ вариабельную часть веб-страницы
     var storage=localStorage.colorCode;
-    if (!storage){
+    if (!storage){             //текущий номер образца берется в локальной памяти или 0
         choice=0;
     }
     else {
         choice=parseInt(storage); 
     };
-    //console.log(choice);
-    var example=[                       //создаем массив с образцами заданий разной сложности, всего 85 заданий
+    
+    var example=[                       //создаем массив с образцами заданий разной сложности
         [r2, 0, r6, 0],  // все значения парами: id плитки и угол поворота по часовой стрелке
         [r9, 0, r5, 0],
         [r2, 0, r12, 0],
@@ -199,12 +92,11 @@
         [r9, 180, r13, 90],
         [r5, 0, r6, 0, r8, 0],
         [r9, 0, r6, 0, r10, 90],
-        [r7, 180, r13, 0, r2, 0],
         [r4, 0, r1, 180, r16, 270],
         [r6, 0, r14, 270, r15, 0],
         [r5, 0, r3, 0],
         [r2, 0, r6, 0, r12, 270],
-        [r7, 180, r13, 270, r11, 180],
+        [r1, 180, r13, 270, r11, 180],
         [r8, 0, r9, 180, r16, 270],
         [r9, 90, r10, 180, r17, 270],
         [r6, 0, r16, 0, r1, 90],
@@ -212,13 +104,13 @@
         [r5, 180, r13, 90, r17, 0],
         [r2, 0, r11, 90, r10, 0],
         [r13, 270, r12, 0, r15, 0],
-        [r14, 90, r5, 180, r17, 270],
+        [r1, 0, r14, 90, r5, 180],
         [r18, 180, r12, 0, r4, 0],
         [r5, 180, r1, 180, r17, 0],
-        [r2, 0, r15, 180, r11, 0],
+        [r2, 0, r13, 90, r11, 0],
         [r18, 180, r11, 270, r4, 270],
         [r10, 180, r4, 270, r3, 180],
-        [r8, 180, r12, 90, r17, 0],
+        [r5, 180, r12, 90, r17, 0],
         [r9, 180, r11, 270, r14, 0],
         [r13, 180, r5, 180, r15, 270],
         [r18, 180, r9, 90, r4, 0],
@@ -227,8 +119,6 @@
         [r12, 90, r1, 180, r17, 0, r9, 180],
         [r5, 0, r1, 270, r14, 90, r17, 180],
         [r5, 180, r8, 0, r11, 0, r2, 0],
-        [r5, 270, r14, 0, r17, 90, r7, 0],
-        [r2, 0, r4, 270, r13, 0, r16, 90],
         [r9, 90, r10, 270, r14, 270, r7, 270],
         [r16, 90, r4, 180, r15, 90, r1, 270],
         [r2, 0, r12, 180, r16, 270, r3, 90],
@@ -238,7 +128,6 @@
         [r5, 90, r11, 90, r17, 90, r14, 90],
         [r6, 0, r12, 90, r3, 90, r1, 90],
         [r18, 90, r7, 180, r4, 270, r10, 180],
-        [r5, 180, r12, 90, r8, 90, r17, 90],
         [r18, 90, r12, 180, r11, 0],
         [r8, 90, r15, 270, r3, 270],
         [r9, 180, r18, 0, r14, 0, r4, 0],
@@ -247,16 +136,15 @@
         [r2, 0, r7, 270, r6, 0, r1, 90, r14, 180],
         [r13, 270, r12, 90, r15, 270, r3, 270, r4, 90],
         [r9, 90, r7, 0, r11, 180, r14, 180, r10, 0],
-        [r2, 0, r11, 90, r7, 90, r15, 0, r16, 90],
+        [r2, 0, r11, 90, r15, 0, r6, 0],
         [r12, 0, r7, 0, r1, 90, r14, 180, r11, 270],
         [r18, 0, r2, 0, r15, 180, r4, 180, r16, 90],
         [r13, 90, r12, 0, r14, 0, r15, 0, r2, 0],
-        [r14, 270, r6, 0, r9, 90, r7, 270, r13, 0],
+        [r14, 270, r6, 0, r9, 90, r1, 0],
         [r13, 270, r11, 0, r1, 180, r15, 180],
         [r12, 270, r9, 90, r7, 90, r11, 90, r15, 0],
-        [r6, 0, r1, 180, r14, 0, r9, 180, r17, 270],
-        [r12, 270, r10, 0, r7, 270, r8, 180, r3, 180],
-        [r10, 0, r14, 90, r7, 0, r15, 0, r3, 90],
+        [r12, 270, r7, 270, r6, 0, r3, 180],
+        [r14, 90, r7, 0, r15, 0, r3, 90],
         [r12, 0, r11, 90, r5, 0, r3, 0, r17, 180],
         [r1, 180, r13, 0, r6, 0, r15, 0, r3, 0],
         [r12, 270, r9, 90, r11, 180, r10, 0, r13, 0],
@@ -264,9 +152,9 @@
         [r13, 0, r11, 0, r15, 270, r3, 180],
         [r1, 90, r5, 270, r6, 0, r12, 180, r11, 0],
         [r12, 90, r13, 270, r8, 90, r15, 90],
-        [r2, 0, r11, 270, r14, 270, r16, 0, r4, 90],
+        [r2, 0, r11, 270, r14, 270, r10, 0, r4, 90],
         [r15, 0, r9, 180, r10, 90, r13, 90, r14, 180],
-        [r18, 270, r1, 180, r17, 90, r4, 90, r3, 0],
+        [r18, 270, r1, 180, r4, 90, r3, 0],
     ];
     var last=example.length;
     
@@ -279,14 +167,8 @@
         for (var i=0; i<ex.length; i+=2 ){
             var s=document.createElement('img');
             s.src=(ex[i].src);
-            s.style.position='absolute';
-            s.style.width=square +'px';
-            s.style.height=square +'px';
+            s.className='example';
             s.style.zIndex=i;
-            s.style.borderColor='#d8bfd8';
-            s.style.borderWidth=2+'px';
-            s.style.borderRadius=5+'px';
-            s.style.borderStyle='solid';
             var u=ex[i+1];
             s.style.transform='rotate('+ u + 'deg)';
             sam.appendChild(s);
@@ -305,30 +187,19 @@
         myPage.innerHTML='';
 
         myPage.appendChild(main);
-        var header=document.createElement('div');                    //создаем заголовок
-        header.style.display='inline-block';
-        header.style.alignItems='center';
-        header.style.marginTop=150+'px';
-
+        var header=document.createElement('div');                            //создаем заголовок
+        header.className='header';
+        
         mainPa.appendChild(header);
         var words=['Ц', 'В', 'E', 'Т', 'О', 'В', 'О', 'Й', 'п', 'К', 'О', 'Д']; 
         for (var l=0; l<words.length; l++){
             var letter=document.createElement('div');
             letter.innerText=words[l];
-            letter.style.display='inline-block';
-            letter.style.borderColor='#d8bfd8';
-            letter.style.borderStyle='solid';
-            letter.style.borderRadius=5+'px';
-            letter.style.margin=2+'px';
-            letter.style.paddingTop=8+'px';
-            letter.style.paddingBottom=8+'px';
-            letter.style.paddingLeft=20+'px';
-            letter.style.paddingRight=20+'px';
-            letter.style.fontSize=4+'em';
-            letter.style.fontWeight='bold';
+            letter.className='letter';
+                        
             header.appendChild(letter);
         }
-        var letters=header.children;
+        var letters=header.children;                       //создаем надпись "цветовой код"
         letters[0].style.color='#1489f7'; 
         letters[0].style.transform='rotate('+340+'deg)';
         letters[1].style.color='#85095b'; 
@@ -346,18 +217,18 @@
         letters[7].style.color='#e4f52f';
         letters[7].style.transform='rotate('+350+'deg)';
         letters[8].style.visibility='hidden';
+        letters[8].id='trans';
         letters[9].style.color='#450696'; 
         letters[9].style.transform='rotate('+355+'deg)';
         letters[10].style.color='#450696'; 
         letters[10].style.transform='rotate('+10+'deg)';
         letters[11].style.color='#450696';
         letters[11].style.transform='rotate('+350+'deg)';
-
+        
         header.style.left=main.offsetWidth/2-header.offsetWidth/2;
 
-        var buttons=document.createElement('div');
-        buttons.style.marginTop=100+'px';
-        buttons.style.textAlign='center';
+        var buttons=document.createElement('div');                //создаем кнопки навсигации
+        buttons.className='buttons';
         mainPa.appendChild(buttons);
 
         var but1=document.createElement('input');
@@ -374,7 +245,6 @@
         but2.value='Играть';
         but2.style.marginBottom=15+'px';
         but2.onclick=runGame;
-        //but2.onclick=switchToState( { pagename:'Game', numberChoice:choice } );
         buttons.appendChild(but2);
         var br2=document.createElement('br');
         buttons.appendChild(br2);
@@ -382,26 +252,71 @@
         var but3=document.createElement('input');
         but3.type='button';
         but3.value='Правила игры';
+        but3.onclick=rules;
         buttons.appendChild(but3);
         switchToState( { pagename:'Main' } )
     }
+
+    function rules(){                                               //показываем правила игры
+        var myRules=document.createElement('div');
+        myRules.id='myRules';
+        var rulesPage=document.createElement('div');
+        myRules.appendChild(rulesPage);
+        rulesPage.className='rulesPage';
+        var rulHed=document.createElement('h1');
+        rulHed.innerText='ПРАВИЛА ИГРЫ';
+        rulesPage.appendChild(rulHed);
+
+        var rulInner1=document.createElement('p');
+        rulInner1.innerText='Цель игры – сложить цветные плитки таким образом, чтобы в точности повторить рисунок на образце. Нажимайте на нужные плитки, чтобы их переместить. При необходимости используйте кнопку «Повернуть пластинку», «Убрать пластинку». Для проверки выполнения задания нажмите кнопку «Проверить».';
+        rulesPage.appendChild(rulInner1);
+
+        var rulInner2=document.createElement('p');
+        rulInner2.innerText='Все задания размещены в «Каталоге заданий» по возрастанию сложности, Вы можете выбрать образец из каталога или использовать кнопки «Следующее задание» и «Предыдущее задание» внутри игры.';
+        rulesPage.appendChild(rulInner2);
+
+        var rulInner3=document.createElement('p');
+        rulInner3.innerText='При необходимости можно воспользоваться «Подсказкой».';
+        rulesPage.appendChild(rulInner3);
+
+        var rulInner4=document.createElement('p');
+        rulInner4.innerText='Когда Ваша композиция соответствует изображению в задании – Вы взломали цветовой код !';
+        rulesPage.appendChild(rulInner4);
+
+        var close=document.createElement('input');         //кнопка закрытия правил
+        close.type='button';
+        close.value='Закрыть';
+        close.onclick=mainPage;
+        rulesPage.appendChild(close);
+        myPage.innerHTML=''            
+        myPage.appendChild(myRules); 
+        switchToState( { pagename:'Rules' } );               //изменяем закладку в Хэше
+       
+    };
+    
     var place = document.getElementById('place');
-    place.style.width=square + 0 +'px';
-    place.style.height=square + 0 +'px';        
+      
 
     var record=[];               //Заводим массив, в котором будет собираться информация какие плитки и в каком положении выбрал пользователь
-    
-    window.addEventListener("load", setPosition, false);
-    function setPosition(EO) {
+    window.onbeforeunload=befUnload;
+    function befUnload(EO){
         EO=EO||window.event;
-        var elems=document.getElementsByClassName('plitki');          
+        if (record.length>0){
+            EO.returnValue='Вы можете потерять свои изменения';
+        }
+    };
+    function setPosition(EO) {                   //функция ставит обработчики на плитки
+            EO=EO||window.event;
+            var elems=document.getElementsByClassName('plitki');          
         
-        for (var i=elems.length-1; i>=0; i-- ){
+            for (var i=elems.length-1; i>=0; i-- ){
             var elem=elems[i];
             elem.onclick = imgClick;            
+            };       
+            //console.log('функция setPosition сработала'); 
         };
-        
-    };
+    setPosition();    
+    
     function imgClick(EO) {          //Перемещаем выбранную пластинку
         EO = EO || window.event;
         EO.preventDefault();
@@ -412,14 +327,16 @@
     
         var place = document.getElementById('place');   
         pict.style.zIndex=count++;
-        pict.style.left=0+'px';
-        pict.style.top=0+'px';
-        pict.style.margin=0+'px';
-        pict.style.width=square +'px';
-        pict.style.height=square +'px';
+        pict.style.left=(-5)+'px';
+        pict.style.top=(-5)+'px';
+        pict.style.width='inherit';
+        pict.style.height='inherit';
+        
+        
         var audio = new Audio('Sound/Click.mp3');
         audio.play(); 
         place.appendChild(pict);
+        
           
 
         function imgRecord(pict){    //Проверяем есть ли данные о выбранной пластинке в массиве record, т.к. пользователь может несколько раз
@@ -440,7 +357,6 @@
         else record.push(pict.id, 0);    // первоначальный угол 0градусов
         
         window.onmousemove = null; 
-        //console.log(record);
         return record
     }
     function imgRotate(){        //функция поворачивает верхнюю пластинку, вызывается кнопкой
@@ -460,8 +376,7 @@
         var parent=document.getElementById('place');
         var rot=parent.lastChild;       //Находим самую верхнюю пластинку
         rot.style.position='static';
-        rot.style.width=parSquare +'px';
-        rot.style.height=parSquare +'px';
+       
         rot.style.transform='rotate('+ 0 + 'deg)';
         
         record.pop();   //удаляем из массива record угол поворота пластинки
@@ -527,6 +442,7 @@
             }    
         
         mother.appendChild(rot);
+       
         var audio1 = new Audio('Sound/Delete.mp3');
         audio1.play(); 
         mother=null;
@@ -535,7 +451,6 @@
     var rezult;
     function imgVerify(){  //Проверяем решение задания: сравниваем массивы [record] и [example[choice]]
         var recordCompare=[];   //из массива record переносим и преобразуем данные в массив recordCompare (обрезаем значения углов)
-        console.log(record);
         for (var i=0; i<record.length; i=i+2 ){
             recordCompare.push(record[i]);
             var ug=record[(i+1)];                        
@@ -557,7 +472,6 @@
             recordCompare.push(ug);
                         
         }
-        console.log(recordCompare);
         var exampleCompare=[];   //из массива example[choice] переносим и преобразуем данные в массив exampleCompare (только id, а не весь элемент в массив)
         var exLen=example[choice].length;
         var ex=example[choice];
@@ -565,38 +479,33 @@
             exampleCompare.push(ex[u].id);
             exampleCompare.push(ex[u+1]); 
         }     
-        console.log(exampleCompare);
-
+        
         var recLen=recordCompare.length;
-        console.log(recLen, exLen);
-        if(recLen==exLen){
+        
+        if(recLen==exLen){                //вначале сравниваем длину массивов, если одинакова, проверяем дальше, иначе - ошибка выполнения задания   
             rezult=true;
             arrayCompare(recordCompare, exampleCompare);
         }
         else rezult=false;
-        console.log(rezult);
-
+        
         function arrayCompare(){
             for (var n=0; n<exLen; n++ ){
             var redCom=recordCompare[n];
             var exi=exampleCompare[n];
-            console.log(redCom, exi);
                 if(redCom==exi){
                     rezult=true;
-                    console.log(redCom, exi, rezult);
+                    //console.log(redCom, exi, rezult);
                     continue
                 }
                 else rezult=false;  break;  console.log(rezult);               
             }
             return rezult
         }
-        console.log(rezult);
         showRezult(rezult);
         return rezult
-    }
+    }    
     
-    
-    function imgNext(){
+    function imgNext(){                          //вызов следующего задания
         if (choice>=example.length-1){
         choice=0;
         }
@@ -611,9 +520,9 @@
             }          
         }  
         
-        switchToState( { pagename:'Game', numberChoice:choice } );    
+        switchToState( { pagename:'Game', numberChoice:choice } );    //изменяем хэш
     }
-    function imgPre(){
+    function imgPre(){     //вызов предыдущего задания   
         if (choice<=0){
         choice=example.length-1;
         }
@@ -627,25 +536,31 @@
             imgDelete();                   
         }  
         }   
-        switchToState( { pagename:'Game', numberChoice:choice } );     
+        switchToState( { pagename:'Game', numberChoice:choice } );     //изменяем хэш
     }
-    function imgHelp(){        
+    function imgHelp(){                            //вызов подсказки
+        var sam=document.getElementById('sam'); 
         var child=sam.children;
-        console.log(child);
+        var widthStart=sam.offsetWidth;
+        var widthHelp=widthStart*0.7;
+        var startX=widthStart*0.3;
+        var moveX=widthStart*0.3;
+        var startY=widthStart*0.36;
+        var moveY=widthStart*0.1;
         for (var i=0; i<child.length; i++){
-            var x=-120+(90*i);
-            var y=110-(25*i);
+            var x=-startX+(moveX*i);
+            var y=startY-(moveY*i);
             var ex=example[choice];
             var u=ex[i*2+1];
             child[i].style.transform='translateZ(0)translateX('+x+'px)translateY('+y+'px)rotate('+ u + 'deg) ';
-            child[i].style.width=helpSquare +'px';        //раскладываем картинку
-            child[i].style.height=helpSquare +'px';
+            child[i].style.width=widthStart/2 +'px';        //раскладываем картинку
+            child[i].style.height=widthStart/2 +'px';
             child[i].style.opacity=0.9;
             child[0].style.opacity=1;
             child[i].style.transitionDuration=3+'s';
             var audio3 = new Audio('Sound/Help.mp3');
             audio3.play(); 
-        
+                   
         }                       
         setTimeout(complete, 7000);
         function complete(){
@@ -655,28 +570,28 @@
             var ex=example[choice];
             var u=ex[i*2+1];
             child[i].style.transform='translateZ(0)translateX('+x+'px)translateY('+y+'px)rotate('+ u + 'deg) ';
-            child[i].style.width=square +'px';        //складываем картинку
-            child[i].style.height=square +'px';
+            child[i].style.width='inherit';        //складываем картинку
+            child[i].style.height='inherit';
             child[i].style.opacity=1;
             child[i].style.transitionDuration=3+'s';
         }           
         }
     }
-    function showRezult(){
-        console.log(rezult);
+    function showRezult(){             //показываем результат
+        //console.log(rezult);
         if (rezult==true){
            confe();
            winner();
         }
         else loser();
     }
-    function confe(){
+    function confe(){           //анимация конфетти
         var count = 200;
         var defaults = {
         origin: { y: 0.7 }
         };
 
-    function fire(particleRatio, opts) {
+    function fire(particleRatio, opts) {              
     confetti(Object.assign({}, defaults, opts, {
     particleCount: Math.floor(count * particleRatio)
     }));
@@ -705,59 +620,44 @@
     startVelocity: 45,
     });
     };
-    function winner(){
+    var lockCount;
+    function winner(){                     // анимация при успехе
         var scrn=document.getElementById('scr');
         var win=document.createElement('div');
+        win.className='winner';
         
-        win.style.position='absolute';
-        win.style.width=500 +'px';
-        win.style.height=80 +'px';
-        win.style.zIndex=1000;
-        win.style.borderColor='red';
-        win.style.borderWidth=2+'px';
-        win.style.borderRadius=10+'%';
-        win.style.borderStyle='solid';
-        win.style.backgroundColor='yellow';
-        win.style.opacity=0.8;
-        win.style.display='inline-block';
-        win.style.left=document.body.offsetWidth/2-250+'px';
-        win.style.top=document.body.offsetHeight/2-40+'px';
+        
         win.innerHTML='ПРАВИЛЬНО';
-        win.style.fontSize=2.5+'em';
-        win.style.color='blue';
-        win.style.textAlign='center';
-        win.style.paddingTop=1+'em';
-        console.log(win, scrn);
+        
+        
         scrn.appendChild(win); 
+        win.style.left=(document.body.offsetWidth/2-win.offsetWidth/2)+'px';
+        win.style.top=(document.body.offsetHeight/2-win.offsetHeight/2)+'px';
+        //console.log(document.body.offsetWidth, win.offsetWidth,win.style.left );
+        //restoreInfo();   //читаем с сервера текущий счетчик успешных решений
+        lockCount++;     //добавляем единицу     
+        console.log(lockCount); 
+        storeInfo();     //перезаписываем новое значение на сервер
+
         var audio4 = new Audio('Sound/tada.mp3');
             audio4.play(); 
         setTimeout(clearW, 4000);
         function clearW(){
             scrn.removeChild(win); 
+         
         }  
     }
-    function loser(){
+    function loser(){            // анимация при ошибке
         var scrn=document.getElementById('scr');
-        var los=document.createElement('div');        
-        los.style.position='absolute';
-        los.style.width=500 +'px';
-        los.style.height=100 +'px';
-        los.style.zIndex=1000;
-        los.style.borderColor='#0ad4f8';
-        los.style.borderWidth=2+'px';
-        los.style.borderRadius=10+'%';
-        los.style.borderStyle='solid';
-        los.style.opacity=0.8;
-        los.style.backgroundColor='#16395a';
-        los.style.display='inline-block';
-        los.style.left=document.body.offsetWidth/2-250+'px';
-        los.style.top=document.body.offsetHeight/2-50+'px';
+        var los=document.createElement('div');   
+        los.className='loser';     
+        
         los.innerHTML='ПОПРОБУЙ ЕЩЕ РАЗ';
-        los.style.fontSize=2+'em';
-        los.style.color='red';
-        los.style.textAlign='center';
-        los.style.paddingTop=1.5+'em';
+        
         scrn.appendChild(los);
+        los.style.left=(document.body.offsetWidth/2-los.offsetWidth/2)+'px';
+        los.style.top=(document.body.offsetHeight/2-los.offsetHeight/2)+'px';
+
         var audio5 = new Audio('Sound/Lose.mp3');
             audio5.play();   
 
@@ -765,9 +665,7 @@
         function clearL(){
             scrn.removeChild(los); 
         }        
-    }   
-
-    
+    }       
     var mn=document.getElementById('mainPa');
 
     function imgCatalog(){                                           //функция вызывает каталог заданий
@@ -780,15 +678,13 @@
         myPage.appendChild(catalog);
         var catName=document.createElement('h1');                    //создаем заголовок
         catName.innerText='КАТАЛОГ ЗАДАНИЙ';
-        catName.style.textAlign='center';
+        catName.className='catName';
         catalog.appendChild(catName);
         for(var p=0; p<example.length; p++){                       //  циклом создаем контейнеры для образцов
             var pattern=document.createElement('div');
-            pattern.style.display='inline-block';
-            pattern.style.width=square/2 +'px';
-            pattern.style.height=square/2 +'px';
-            pattern.style.margin=20+'px';
-            pattern.className=p;
+            pattern.className='pattern';
+            pattern.id=p;
+            
             pattern.onclick=patChoice;
                         
             var pat=example[p];                   //Находим нужный образец по индексу в массиве Example
@@ -796,16 +692,15 @@
                 for (var i=0; i<pat.length; i+=2 ){               //циклом заполняем образцы
                 var pn=document.createElement('img');
                 pn.src=(pat[i].src);
-                pn.style.position='absolute';
-                pn.style.width=square/2 +'px';
-                pn.style.height=square/2 +'px';
                 pn.className=p;
-                pn.style.zIndex=i;
+                pn.style.zIndex=i; 
+                pn.style.width='inherit';
+                pn.style.height='inherit';  
+                pn.style.position='absolute';
                 pn.style.borderColor='#d8bfd8';
-                pn.style.borderWidth=2+'px';
-                pn.style.borderRadius=5+'px';
                 pn.style.borderStyle='solid';
-                
+                pn.style.borderWidth=2+'px';     
+                pn.style.borderRadius=5+'px';            
                 var u=pat[i+1];
                 pn.style.transform='rotate('+ u + 'deg)';
                 pattern.appendChild(pn);
@@ -818,26 +713,24 @@
         EO = EO || window.event;
         var yourImg = EO.target;
         choice=parseInt(yourImg.className); 
-        console.log(choice);
         runGame(choice);
     }    
 
     function runGame(){       //Запускает страницу Game
-        console.log(choice);
         myPage.innerHTML='';
         myPage.appendChild(scrn); 
+        window.addEventListener('hashchange', setPosition, false);
         switchToState( { pagename:'Game', numberChoice:choice } );
-        exampleChoice(choice);
+        exampleChoice(choice);    
+        restoreInfo();
         
         var c=0;
         if (record.length>0){
         for (c=record.length; c>=0;  c=c-2){
             imgDelete();                   
         }  
-        }  
-            
-    }
-    
+        }              
+    }    
 
     function switchToStateFromURLHash() {
         var URLHash=window.location.hash;    
@@ -857,7 +750,7 @@
             case 'Game':
                 console.log(SPAState.numberChoice);
                 if(!SPAState.numberChoice){
-                    choice=choice;
+                    choice=0;
                     
                 }
                 else {choice=SPAState.numberChoice};
@@ -868,24 +761,81 @@
                 imgCatalog();
                 
             break;
+            case 'Rules':
+                rules();
+                
+            break;
         }
     }
-
     function switchToState(newState) {          // устанавливает в закладке УРЛа новое состояние приложения  и затем устанавливает+отображает это состояние
                                                 // устанавливаем закладку УРЛа (кодируя как положено любые компоненты УРЛ)
         location.hash=encodeURIComponent(JSON.stringify(newState));
-        //console.log(location.hash,newState)
-    }                                                               // АВТОМАТИЧЕСКИ вызовется switchToStateFromURLHash()
+            }                                                               // АВТОМАТИЧЕСКИ вызовется switchToStateFromURLHash()
                                             // т.к. закладка УРЛа изменилась (ЕСЛИ она действительно изменилась)
+    switchToStateFromURLHash();   // переключаемся в состояние, которое сейчас прописано в закладке УРЛ    
 
-    switchToStateFromURLHash();   // переключаемся в состояние, которое сейчас прописано в закладке УРЛ
+    var ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
+    var updatePassword;
+    var stringName='Shchahliak_ColorCODE_UNLOCK';    //Будем записывать на сервер количество успешных решений
 
-    
+    function storeInfo() {
+    updatePassword=Math.random();
+    $.ajax( {
+            url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+            data : { f : 'LOCKGET', n : stringName, p : updatePassword },
+            success : lockGetReady, error : errorHandler
+            }
+        );
+        console.log('запрос аякс ушел', 'текущий счетчик '+ lockCount);
+    }
 
-    
-    
-    </script>
-       
-    </body>
-    
+    function lockGetReady(callresult) {
+        if ( callresult.error!=undefined )
+        console.log(callresult.error);
+        else {                    // нам всё равно, что было прочитано  всё равно перезаписываем
+        var unLock={count : lockCount};
+
+            console.log(lockCount);
+            document.getElementById('lock').innerHTML=lockCount;
+        $.ajax( {
+                url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+                data : { f : 'UPDATE', n : stringName, v : JSON.stringify(unLock), p : updatePassword },
+                success : updateReady, error : errorHandler
+            }
+        );
+    }
+}
+
+function updateReady(callresult) {
+    if ( callresult.error!=undefined )
+        console.log(callresult.error);
+}
+
+function restoreInfo() {
+    $.ajax(
+        {
+            url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
+            data : { f : 'READ', n : stringName },
+            success : readReady, error : errorHandler
+        }
+    );
+    console.log('отправили аякс запрос при загрузке страницы');
+}
+
+function readReady(callresult) {
+    if ( callresult.error!=undefined )
+    lockCount=0;
+    else if ( callresult.result!="" ) {
+        var unLock=JSON.parse(callresult.result);
+        console.log('мы прочитали значение unLock' + unLock);
+        lockCount=parseInt(unLock.count);        
+    }
+    document.getElementById('lock').innerHTML=lockCount;
+}
+
+function errorHandler(jqXHR,statusStr,errorStr) {
+    alert(statusStr+' '+errorStr);
+}    
+    </script>       
+    </body>    
 </html>
